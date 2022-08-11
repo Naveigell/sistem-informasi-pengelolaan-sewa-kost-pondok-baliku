@@ -1,0 +1,13 @@
+<?=  $this->extend('templates/index'); ?>
+
+<?=  $this->section('page-content'); ?>
+
+<?=  $this->endSection(); ?>
+
+<?= $ ?>
+<?= $this ->include('templates/sidebar'); ?>
+href  <?= base_url(); ?>/
+
+bootstrap ver 1.5.3
+
+38.34
