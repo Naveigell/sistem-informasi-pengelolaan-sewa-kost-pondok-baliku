@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call('RoomSeeder');
         $this->call('RoomFacilitySeeder');
         $this->call('RoomFacilityPivotSeeder');
+        $this->call('RoomUserPivotSeeder');
     }
 }
