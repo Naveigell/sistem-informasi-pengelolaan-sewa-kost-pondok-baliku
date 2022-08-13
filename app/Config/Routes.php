@@ -43,6 +43,17 @@ $routes->get('/', 'Home::index', ["as" => "home", "filter" => "auth"]);
 $routes->get('/logout', 'Auth\LogoutController::index', ["as" => "logout"]);
 $routes->get('/test', 'Home::template');
 
+$routes->group('admin', function ($routes) {
+    $routes->get('dashboards', 'Admin\DashboardController::index', ["as" => "admin.dashboards.index"]);
+
+    $routes->get('rooms', 'Admin\RoomController::index', ["as" => "admin.rooms.index"]);
+    $routes->get('rooms/create', 'Admin\RoomController::create', ["as" => "admin.rooms.create"]);
+    $routes->get('rooms/(:num)/edit', 'RoomhboardController::edit/$1', ["as" => "admin.rooms.edit"]);
+    $routes->put('rooms/(:num)', 'Admin\RoomController::update/$1', ["as" => "admin.rooms.update"]);
+    $routes->post('rooms', 'Admin\RoomController::store', ["as" => "admin.rooms.store"]);
+    $routes->delete('rooms/(:num)', 'Admin\RoomController::destroy/$1', ["as" => "admin.rooms.destroy"]);
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

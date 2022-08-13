@@ -26,5 +26,10 @@ class RoomFacilityPivotSeeder extends Seeder
                 ]);
             }
         }
+
+        $facility = new RoomFacility();
+        $facility->insert([
+            "facility_name" => "Test Facility",
+        ]);
     }
 }

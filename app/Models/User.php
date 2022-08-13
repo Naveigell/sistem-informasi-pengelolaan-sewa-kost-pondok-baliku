@@ -12,4 +12,9 @@ class User extends Model
     public const ROLE_USER  = 'user';
 
     protected $allowedFields = ['name', 'username', 'email', 'password', 'role'];
+
+    public function whereNotAdmin()
+    {
+        return $this->whereNotIn('role', [self::ROLE_ADMIN]);
+    }
 }

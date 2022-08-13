@@ -11,7 +11,7 @@ class RoomUserPivotSeeder extends Seeder
 {
     public function run()
     {
-        $users  = (new User())->findAll();
+        $users  = (new User())->whereNotAdmin()->findAll();
         $rooms  = (new Room())->findAll();
         $pivot  = new RoomUserPivot();
 
