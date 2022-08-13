@@ -41,6 +41,7 @@ $routes->get('/register', 'Auth\RegisterController::index', ["as" => "register.i
 $routes->post('/register', 'Auth\RegisterController::store', ["as" => "register.store"]);
 $routes->get('/', 'Home::index', ["as" => "home", "filter" => "auth"]);
 $routes->get('/logout', 'Auth\LogoutController::index', ["as" => "logout"]);
+$routes->get('/test', 'Home::template');
 
 /*
  * --------------------------------------------------------------------
