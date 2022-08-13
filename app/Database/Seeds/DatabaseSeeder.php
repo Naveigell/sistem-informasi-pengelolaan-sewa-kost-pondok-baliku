@@ -9,5 +9,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call('UsersSeeder');
+        $this->call('RoomTypeSeeder');
+        $this->call('RoomRentDurationSeeder');
+        $this->call('RoomSeeder');
+        $this->call('RoomFacilitySeeder');
+        $this->call('RoomFacilityPivotSeeder');
     }
 }
