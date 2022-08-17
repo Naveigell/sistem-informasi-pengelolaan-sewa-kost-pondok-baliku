@@ -77,6 +77,7 @@ Dashboard
                                                     <div class="card-body">
                                                         <form class="form">
                                                             <div class="row">
+                                                                <div class="col-md-12 col-12 d-none alert alert-danger" id="error-messages-<?= $room['id']; ?>"></div>
                                                                 <div class="col-md-6 col-12">
                                                                     <div class="form-group">
                                                                         <label>Fasilitas yang digunakan</label>
@@ -141,8 +142,8 @@ Dashboard
 
                                                             </div>
                                                             <div class="col-12 d-flex justify-content-end">
+                                                                <button type="button" data-bs-dismiss="modal" class="btn btn-light-secondary me-1 mb-1">Tutup</button>
                                                                 <button type="button" class="btn btn-primary me-1 mb-1 save-room" data-room-id="<?= $room['id']; ?>">Simpan</button>
-                                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -219,8 +220,11 @@ Dashboard
                     price: roomPrice.inputmask('unmaskedvalue'),
                     user_id: roomOccupant.val(),
                 },
-                success: function (response) {
+                success: function (response, statusText, status) {
                     window.location.reload();
+                },
+                error: function (response) {
+                    render_errors($("#error-messages-" + roomId), JSON.parse(response.responseText));
                 }
             });
         });

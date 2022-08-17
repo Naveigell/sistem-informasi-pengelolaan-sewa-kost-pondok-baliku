@@ -57,6 +57,25 @@
         });
     </script>
 
+    <script>
+        function render_errors(element, errors) {
+            var keys = Object.keys(errors);
+
+            $(element).html('');
+            $(element).removeClass('d-none');
+
+            var html = '<ul style="margin: 0">';
+
+            for (const key of keys) {
+                html += '<li>' + errors[key] + '</li>';
+            }
+
+            html += '</ul>';
+
+            $(element).html(html);
+        }
+    </script>
+
     <?= $this->renderSection('content-script'); ?>
 </body>
 

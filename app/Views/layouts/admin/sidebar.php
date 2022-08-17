@@ -45,15 +45,15 @@
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item  ">
-                    <a href="dataPenghuniKos.html" class="sidebar-link">
+                <li class="sidebar-item <?= exists_in_segment(['occupants']) ? 'active' : ''; ?>">
+                    <a href="<?= route_to('admin.occupants.index'); ?>" class="sidebar-link">
                         <i class="bi bi-file-earmark-medical-fill"></i>
                         <span>Data Penghuni Kos</span>
                     </a>
                 </li>
 
 
-                <li class="sidebar-item active ">
+                <li class="sidebar-item <?= exists_in_segment(['rooms']) ? 'active' : ''; ?>">
                     <a href="<?= route_to('admin.rooms.index'); ?>" class="sidebar-link">
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Data Kamar Kos</span>

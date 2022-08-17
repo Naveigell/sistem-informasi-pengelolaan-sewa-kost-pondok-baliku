@@ -52,6 +52,13 @@ $routes->group('admin', function ($routes) {
     $routes->put('rooms/(:num)', 'Admin\RoomController::update/$1', ["as" => "admin.rooms.update"]);
     $routes->post('rooms', 'Admin\RoomController::store', ["as" => "admin.rooms.store"]);
     $routes->delete('rooms/(:num)', 'Admin\RoomController::destroy/$1', ["as" => "admin.rooms.destroy"]);
+
+    $routes->get('occupants', 'Admin\OccupantController::index', ["as" => "admin.occupants.index"]);
+    $routes->get('occupants/create', 'Admin\OccupantController::create', ["as" => "admin.occupants.create"]);
+    $routes->get('occupants/(:num)/edit', 'OccupanthboardController::edit/$1', ["as" => "admin.occupants.edit"]);
+    $routes->put('occupants/(:num)', 'Admin\OccupantController::update/$1', ["as" => "admin.occupants.update"]);
+    $routes->post('occupants', 'Admin\OccupantController::store', ["as" => "admin.occupants.store"]);
+    $routes->delete('occupants/(:num)', 'Admin\OccupantController::destroy/$1', ["as" => "admin.occupants.destroy"]);
 });
 
 /*

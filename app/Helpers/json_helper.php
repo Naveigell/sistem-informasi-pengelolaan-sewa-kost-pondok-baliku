@@ -7,5 +7,7 @@ if (!function_exists('render_json')) {
         if (count(func_get_args()) > 1) {
             echo json_encode(...$payload);
         }
+
+        exit();
     }
 }
