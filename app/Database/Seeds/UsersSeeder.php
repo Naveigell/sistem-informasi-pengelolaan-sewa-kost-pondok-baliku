@@ -22,14 +22,14 @@ class UsersSeeder extends Seeder
                 'name'     => 'member',
                 'email'    => 'member@gmail.com',
                 'password' => password_hash(123456, PASSWORD_DEFAULT),
-                'role'     => User::ROLE_USER,
+                'role'     => User::ROLE_MEMBER,
             ],
             [
                 'username' => 'member123',
                 'name'     => 'member123',
                 'email'    => 'member123@gmail.com',
                 'password' => password_hash(123456, PASSWORD_DEFAULT),
-                'role'     => User::ROLE_USER,
+                'role'     => User::ROLE_MEMBER,
             ],
         ];
 

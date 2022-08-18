@@ -2,7 +2,9 @@
 
 namespace Config;
 
+use App\Filters\AdminFilter;
 use App\Filters\FilterUser;
+use App\Filters\MemberFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -25,6 +27,8 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'auth'          => FilterUser::class,
+        'adminfilter'   => AdminFilter::class,
+        'memberfilter'  => MemberFilter::class,
     ];
 
     /**

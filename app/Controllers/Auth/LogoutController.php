@@ -10,6 +10,6 @@ class LogoutController extends BaseController
     {
         session()->destroy();
 
-        return redirect()->route('home');
+        return redirect()->route('login.index');
     }
 }

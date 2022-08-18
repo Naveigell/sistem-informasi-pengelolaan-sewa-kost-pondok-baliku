@@ -50,7 +50,7 @@ class RegisterController extends BaseController
                 'username' => $this->request->getVar('username'),
                 'email'    => $this->request->getVar('email'),
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-                'role'     => User::ROLE_USER,
+                'role'     => User::ROLE_MEMBER,
             ]);
         } catch (\ReflectionException $e) {
             var_dump($e->getMessage());

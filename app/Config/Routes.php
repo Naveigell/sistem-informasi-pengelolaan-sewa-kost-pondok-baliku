@@ -39,26 +39,24 @@ $routes->get('/login', 'Auth\LoginController::index', ["as" => "login.index"]);
 $routes->post('/login', 'Auth\LoginController::store', ["as" => "login.store"]);
 $routes->get('/register', 'Auth\RegisterController::index', ["as" => "register.index"]);
 $routes->post('/register', 'Auth\RegisterController::store', ["as" => "register.store"]);
-$routes->get('/', 'Home::index', ["as" => "home", "filter" => "auth"]);
 $routes->get('/logout', 'Auth\LogoutController::index', ["as" => "logout"]);
 $routes->get('/test', 'Home::template');
 
-$routes->group('admin', function ($routes) {
+$routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
     $routes->get('dashboards', 'Admin\DashboardController::index', ["as" => "admin.dashboards.index"]);
 
     $routes->get('rooms', 'Admin\RoomController::index', ["as" => "admin.rooms.index"]);
-    $routes->get('rooms/create', 'Admin\RoomController::create', ["as" => "admin.rooms.create"]);
-    $routes->get('rooms/(:num)/edit', 'RoomhboardController::edit/$1', ["as" => "admin.rooms.edit"]);
     $routes->put('rooms/(:num)', 'Admin\RoomController::update/$1', ["as" => "admin.rooms.update"]);
-    $routes->post('rooms', 'Admin\RoomController::store', ["as" => "admin.rooms.store"]);
-    $routes->delete('rooms/(:num)', 'Admin\RoomController::destroy/$1', ["as" => "admin.rooms.destroy"]);
 
     $routes->get('occupants', 'Admin\OccupantController::index', ["as" => "admin.occupants.index"]);
-    $routes->get('occupants/create', 'Admin\OccupantController::create', ["as" => "admin.occupants.create"]);
-    $routes->get('occupants/(:num)/edit', 'OccupanthboardController::edit/$1', ["as" => "admin.occupants.edit"]);
     $routes->put('occupants/(:num)', 'Admin\OccupantController::update/$1', ["as" => "admin.occupants.update"]);
-    $routes->post('occupants', 'Admin\OccupantController::store', ["as" => "admin.occupants.store"]);
-    $routes->delete('occupants/(:num)', 'Admin\OccupantController::destroy/$1', ["as" => "admin.occupants.destroy"]);
+});
+
+$routes->group('member', ['filter' => 'memberfilter'], function ($routes) {
+    $routes->get('dashboards', 'Member\DashboardController::index', ["as" => "member.dashboards.index"]);
+
+    $routes->get('payments', 'Member\PaymentController::index', ["as" => "admin.payments.index"]);
+    $routes->post('payments', 'Member\PaymentController::store', ["as" => "admin.payments.store"]);
 });
 
 /*
