@@ -50,6 +50,9 @@ $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
 
     $routes->get('occupants', 'Admin\OccupantController::index', ["as" => "admin.occupants.index"]);
     $routes->put('occupants/(:num)', 'Admin\OccupantController::update/$1', ["as" => "admin.occupants.update"]);
+
+    $routes->get('complaints', 'Admin\ComplaintController::index', ["as" => "admin.complaints.index"]);
+    $routes->put('complaints/(:num)', 'Admin\ComplaintController::update/$1', ["as" => "admin.complaints.update"]);
 });
 
 $routes->group('member', ['filter' => 'memberfilter'], function ($routes) {

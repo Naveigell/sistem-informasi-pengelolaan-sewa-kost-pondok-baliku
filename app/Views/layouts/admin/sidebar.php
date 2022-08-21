@@ -60,8 +60,8 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item  ">
-                    <a href="pesanKomplainAdmin.html" class="sidebar-link">
+                <li class="sidebar-item <?= exists_in_segment(['complaints']) ? 'active' : ''; ?>">
+                    <a href="<?= route_to('admin.complaints.index'); ?>" class="sidebar-link">
                         <i class="bi bi-chat-dots-fill"></i>
                         <span>Pesan Komplain</span>
                     </a>
