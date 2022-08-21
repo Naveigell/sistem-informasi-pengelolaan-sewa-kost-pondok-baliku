@@ -10,6 +10,7 @@ class Payment extends Model
 
     const STATUS_UNVERIFIED = 'unverified';
     const STATUS_PAID_OFF   = 'paid off';
+    const STATUS_REJECTED   = 'rejected';
 
     const TYPE_CASH     = 'cash';
     const TYPE_TRANSFER = 'transfer';

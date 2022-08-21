@@ -24,8 +24,8 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
-                <li class="sidebar-item ">
-                    <a href="indexAdmin.html" class="sidebar-link">
+                <li class="sidebar-item <?= exists_in_segment(['dashboards']) ? 'active' : ''; ?>">
+                    <a href="<?= route_to('admin.dashboards.index'); ?>" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -36,12 +36,12 @@
                         <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                         <span>Pembayaran</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="verifikasiPembayaran.html">Verifikasi</a>
+                    <ul class="submenu <?= exists_in_segment(['payments']) ? 'active' : ''; ?>">
+                        <li class="submenu-item <?= all_in_segment(['payments', 'verifications']) ? 'active' : ''; ?>">
+                            <a href="<?= route_to('admin.payments.verifications.index'); ?>">Verifikasi</a>
                         </li>
-                        <li class="submenu-item ">
-                            <a href="riwayatPembayaran.html">Riwayat</a>
+                        <li class="submenu-item <?= all_in_segment(['payments', 'histories']) ? 'active' : ''; ?>">
+                            <a href="<?= route_to('admin.payments.histories.index'); ?>">Riwayat</a>
                         </li>
                     </ul>
                 </li>

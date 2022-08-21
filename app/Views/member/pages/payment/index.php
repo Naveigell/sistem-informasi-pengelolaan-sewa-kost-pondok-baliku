@@ -150,8 +150,10 @@
                                     <td>
                                         <?php if ($payment['status'] == \App\Models\Payment::STATUS_PAID_OFF): ?>
                                             <span class="badge bg-success">Lunas</span>
+                                        <?php elseif ($payment['status'] == \App\Models\Payment::STATUS_UNVERIFIED): ?>
+                                            <span class="badge bg-warning">Belum Diverifikasi</span>
                                         <?php else: ?>
-                                            <span class="badge bg-danger">Belum Diverifikasi</span>
+                                            <span class="badge bg-danger">Ditolak</span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>

@@ -53,6 +53,11 @@ $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
 
     $routes->get('complaints', 'Admin\ComplaintController::index', ["as" => "admin.complaints.index"]);
     $routes->put('complaints/(:num)', 'Admin\ComplaintController::update/$1', ["as" => "admin.complaints.update"]);
+
+    $routes->get('payments/verifications', 'Admin\PaymentController::verficiationIndex', ["as" => "admin.payments.verifications.index"]);
+    $routes->put('payments/verifications/(:num)', 'Admin\PaymentController::verficiationUpdate/$1', ["as" => "admin.payments.verifications.update"]);
+
+    $routes->get('payments/histories', 'Admin\PaymentController::historyIndex', ["as" => "admin.payments.histories.index"]);
 });
 
 $routes->group('member', ['filter' => 'memberfilter'], function ($routes) {
