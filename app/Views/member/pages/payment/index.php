@@ -83,6 +83,16 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="payment_type">Tipe Pembayaran</label>
+                                                                            <select name="payment_type" id="payment_type" class="form-control">
+                                                                                <option value="">-- Nothing Selected --</option>
+                                                                                <option value="<?= \App\Models\Payment::TYPE_CASH; ?>"><?= ucwords(\App\Models\Payment::TYPE_CASH); ?></option>
+                                                                                <option value="<?= \App\Models\Payment::TYPE_TRANSFER; ?>"><?= ucwords(\App\Models\Payment::TYPE_TRANSFER); ?></option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-12">
                                                                         <div class="mb-3">
                                                                             <label for="proof" class="form-label">Unggah Bukti Pembayaran</label>
                                                                             <input class="form-control" type="file" id="proof">
@@ -122,6 +132,8 @@
                             <th>Fasilitas</th>
                             <th>Tipe Kamar</th>
                             <th>Bukti Pembayaran</th>
+                            <th>Tipe Pembayaran</th>
+                            <th>Deskripsi</th>
                             <th>Keterangan</th>
                         </tr>
                         </thead>
@@ -133,6 +145,8 @@
                                     <td class="text-bold-500"><?= count($facilities) > 0 ? join(', ', array_column($facilities, 'facility_name')) : '-'; ?></td>
                                     <td><?= $roomType['name']; ?></td>
                                     <td><img src="<?= base_url('uploads/images/payments') . DIRECTORY_SEPARATOR . $payment['proof']; ?>" alt="" style="width: 150px; height: 150px;"></td>
+                                    <td><?= ucwords($payment['payment_type']); ?></td>
+                                    <td><?= $payment['description'] ?: '-'; ?></td>
                                     <td>
                                         <?php if ($payment['status'] == \App\Models\Payment::STATUS_PAID_OFF): ?>
                                             <span class="badge bg-success">Lunas</span>
@@ -177,11 +191,13 @@
             var description  = $('#description');
             var proof        = $('#proof');
             var paymentDate  = $('#payment_date');
+            var paymentType  = $('#payment_type');
 
             var form = new FormData();
             form.append('room_id', '<?= $room["id"]; ?>');
             form.append('description', description.val());
             form.append('payment_date', paymentDate.val() + '-01');
+            form.append('payment_type', paymentType.find(':selected').val());
             form.append('proof', proof[0].files.length > 0 ? proof[0].files[0] : null);
 
             $.ajax({

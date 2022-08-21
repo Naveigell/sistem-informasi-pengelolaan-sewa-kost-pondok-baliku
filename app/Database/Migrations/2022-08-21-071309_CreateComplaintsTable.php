@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreatePaymentsTable extends Migration
+class CreateComplaintsTable extends Migration
 {
     public function up()
     {
@@ -26,12 +26,8 @@ class CreatePaymentsTable extends Migration
                 'unsigned' => true,
                 'null' => true,
             ],
-            'payment_date' => [
+            'complaint_date' => [
                 'type' => 'DATE',
-            ],
-            'payment_type' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
             ],
             'proof' => [
                 'type' => 'VARCHAR',
@@ -49,11 +45,11 @@ class CreatePaymentsTable extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('room_id', 'rooms', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('payments');
+        $this->forge->createTable('complaints');
     }
 
     public function down()
     {
-        $this->forge->dropTable('payments');
+        $this->forge->dropTable('complaints');
     }
 }

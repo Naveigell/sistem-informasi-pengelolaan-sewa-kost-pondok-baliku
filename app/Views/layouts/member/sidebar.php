@@ -24,21 +24,21 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
-                <li class="sidebar-item active ">
-                    <a href="indexUser.html" class="sidebar-link">
+                <li class="sidebar-item <?= exists_in_segment(['dashboards']) ? 'active' : ''; ?>">
+                    <a href="<?= route_to('member.dashboards.index'); ?>" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item ">
-                    <a href="<?= route_to('admin.payments.index'); ?>" class="sidebar-link">
+                <li class="sidebar-item <?= exists_in_segment(['payments']) ? 'active' : ''; ?>">
+                    <a href="<?= route_to('member.payments.index'); ?>" class="sidebar-link">
                         <i class="bi bi-file-earmark-medical-fill"></i>
                         <span>Pembayaran</span>
                     </a>
                 </li>
-                <li class="sidebar-item  ">
-                    <a href="pesanKomplainUser.html" class="sidebar-link">
+                <li class="sidebar-item <?= exists_in_segment(['complaints']) ? 'active' : ''; ?>">
+                    <a href="<?= route_to('member.complaints.index'); ?>" class="sidebar-link">
                         <i class="bi bi-chat-dots-fill"></i>
                         <span>Pesan Komplain</span>
                     </a>

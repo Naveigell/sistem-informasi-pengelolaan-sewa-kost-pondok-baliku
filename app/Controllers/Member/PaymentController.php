@@ -25,7 +25,7 @@ class PaymentController extends BaseController
 
         $facilities = count($facilityPivotIds) > 0 ? (new RoomFacility())->whereIn('id', $facilityPivotIds)->findAll() : [];
 
-        return view('member/payment/index', compact('payments', 'roomUserPivot', 'room', 'roomType', 'roomFacilityPivot', 'facilityPivotIds', 'facilities'));
+        return view('member/pages/payment/index', compact('payments', 'roomUserPivot', 'room', 'roomType', 'roomFacilityPivot', 'facilityPivotIds', 'facilities'));
     }
 
     public function store()
@@ -37,6 +37,9 @@ class PaymentController extends BaseController
             ],
             'payment_date' => [
                 'rules' => 'required|valid_date[Y-m-d]',
+            ],
+            'payment_type' => [
+                'rules' => 'required',
             ],
             'description' => [
                 'rules' => 'permit_empty',
@@ -59,6 +62,7 @@ class PaymentController extends BaseController
                 "user_id"      => session()->get('user')->id,
                 "room_id"      => $this->request->getVar('room_id'),
                 "payment_date" => $this->request->getVar('payment_date'),
+                "payment_type" => $this->request->getVar('payment_type'),
                 "proof"        => $imageName,
                 "description"  => $this->request->getVar('description') ?? null,
                 "status"       => Payment::STATUS_UNVERIFIED,

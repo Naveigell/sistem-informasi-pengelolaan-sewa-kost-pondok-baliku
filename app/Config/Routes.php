@@ -55,8 +55,11 @@ $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
 $routes->group('member', ['filter' => 'memberfilter'], function ($routes) {
     $routes->get('dashboards', 'Member\DashboardController::index', ["as" => "member.dashboards.index"]);
 
-    $routes->get('payments', 'Member\PaymentController::index', ["as" => "admin.payments.index"]);
-    $routes->post('payments', 'Member\PaymentController::store', ["as" => "admin.payments.store"]);
+    $routes->get('payments', 'Member\PaymentController::index', ["as" => "member.payments.index"]);
+    $routes->post('payments', 'Member\PaymentController::store', ["as" => "member.payments.store"]);
+
+    $routes->get('complaints', 'Member\ComplaintController::index', ["as" => "member.complaints.index"]);
+    $routes->post('complaints', 'Member\ComplaintController::store', ["as" => "member.complaints.store"]);
 });
 
 /*

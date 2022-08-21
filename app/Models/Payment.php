@@ -11,5 +11,8 @@ class Payment extends Model
     const STATUS_UNVERIFIED = 'unverified';
     const STATUS_PAID_OFF   = 'paid off';
 
-    protected $allowedFields = ['room_id', 'user_id', 'payment_date', 'proof', 'description', 'status'];
+    const TYPE_CASH     = 'cash';
+    const TYPE_TRANSFER = 'transfer';
+
+    protected $allowedFields = ['room_id', 'user_id', 'payment_date', 'payment_type', 'proof', 'description', 'status'];
 }
