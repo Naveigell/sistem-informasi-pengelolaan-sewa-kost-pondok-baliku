@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Filters\AdminFilter;
+use App\Filters\AnonymousFilter;
 use App\Filters\FilterUser;
 use App\Filters\MemberFilter;
 use CodeIgniter\Config\BaseConfig;
@@ -21,14 +22,15 @@ class Filters extends BaseConfig
      * @var array
      */
     public $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
-        'secureheaders' => SecureHeaders::class,
-        'auth'          => FilterUser::class,
-        'adminfilter'   => AdminFilter::class,
-        'memberfilter'  => MemberFilter::class,
+        'csrf'            => CSRF::class,
+        'toolbar'         => DebugToolbar::class,
+        'honeypot'        => Honeypot::class,
+        'invalidchars'    => InvalidChars::class,
+        'secureheaders'   => SecureHeaders::class,
+        'auth'            => FilterUser::class,
+        'adminfilter'     => AdminFilter::class,
+        'memberfilter'    => MemberFilter::class,
+        'anonymousfilter' => AnonymousFilter::class,
     ];
 
     /**

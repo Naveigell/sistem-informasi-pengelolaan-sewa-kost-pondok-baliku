@@ -42,6 +42,14 @@ $routes->post('/register', 'Auth\RegisterController::store', ["as" => "register.
 $routes->get('/logout', 'Auth\LogoutController::index', ["as" => "logout"]);
 $routes->get('/test', 'Home::template');
 
+$routes->group('', ['filter' => 'anonymousfilter'], function ($routes) {
+    $routes->get('/', 'Anonymous\LandingPageController::index', ["as" => "anonymous.index"]);
+    $routes->get('/roomA', 'Anonymous\RoomController::roomA', ["as" => "anonymous.rooms-a.index"]);
+    $routes->get('/roomB', 'Anonymous\RoomController::roomB', ["as" => "anonymous.rooms-b.index"]);
+    $routes->get('/roomC', 'Anonymous\RoomController::roomC', ["as" => "anonymous.rooms-c.index"]);
+    $routes->get('/contacts', 'Anonymous\ContactController::index', ["as" => "anonymous.contacts.index"]);
+});
+
 $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
     $routes->get('dashboards', 'Admin\DashboardController::index', ["as" => "admin.dashboards.index"]);
 
