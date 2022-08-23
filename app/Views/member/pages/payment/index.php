@@ -144,7 +144,11 @@
                                     <td><?= format_currency($room['price']); ?></td>
                                     <td class="text-bold-500"><?= count($facilities) > 0 ? join(', ', array_column($facilities, 'facility_name')) : '-'; ?></td>
                                     <td><?= $roomType['name']; ?></td>
-                                    <td><img src="<?= base_url('uploads/images/payments') . DIRECTORY_SEPARATOR . $payment['proof']; ?>" alt="" style="width: 150px; height: 150px;"></td>
+                                    <td>
+                                        <a href="<?= base_url('uploads/images/payments') . DIRECTORY_SEPARATOR . $payment['proof']; ?>" class="image-zoom">
+                                            <img src="<?= base_url('uploads/images/payments') . DIRECTORY_SEPARATOR . $payment['proof']; ?>" alt="" style="width: 150px; height: 150px;">
+                                        </a>
+                                    </td>
                                     <td><?= ucwords($payment['payment_type']); ?></td>
                                     <td><?= $payment['description'] ?: '-'; ?></td>
                                     <td>

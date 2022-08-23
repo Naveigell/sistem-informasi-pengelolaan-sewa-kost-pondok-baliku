@@ -126,7 +126,11 @@ Complaint
                                 <td><?= date('d/m/Y', strtotime($complaint['complaint_date'])); ?></td>
                                 <td class="text-bold-100"><?= $complaint['description'] ?: '-'; ?></td>
                                 <td><?= session()->get('user')->name; ?></td>
-                                <td><img src="<?= base_url('uploads/images/complaints') . DIRECTORY_SEPARATOR . $complaint['proof']; ?>" alt="" style="width: 150px; height: 150px;"></td>
+                                <td>
+                                    <a href="<?= base_url('uploads/images/complaints') . DIRECTORY_SEPARATOR . $complaint['proof']; ?>" class="image-zoom">
+                                        <img src="<?= base_url('uploads/images/complaints') . DIRECTORY_SEPARATOR . $complaint['proof']; ?>" alt="" style="width: 150px; height: 150px;">
+                                    </a>
+                                </td>
                                 <td>
                                     <?php if ($complaint['status'] == \App\Models\Complaint::STATUS_FINISHED): ?>
                                         <span class="badge bg-success">Selesai</span>

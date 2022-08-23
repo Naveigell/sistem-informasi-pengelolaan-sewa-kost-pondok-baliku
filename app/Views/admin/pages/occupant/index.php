@@ -43,7 +43,9 @@ Dashboard
                                 <td class="text-bold-500"><?= $occupant['name']; ?></td>
                                 <td><?= $biodata['job']; ?></td>
                                 <td class="text-bold-500">
-                                    <img src="<?= base_url('uploads/images/occupants') . DIRECTORY_SEPARATOR . $biodata['identity_card']; ?>" alt="" style="width: 150px; height: 150px;">
+                                    <a href="<?= base_url('uploads/images/occupants') . DIRECTORY_SEPARATOR . $biodata['identity_card']; ?>" class="image-zoom">
+                                        <img src="<?= base_url('uploads/images/occupants') . DIRECTORY_SEPARATOR . $biodata['identity_card']; ?>" alt="" style="width: 150px; height: 150px;">
+                                    </a>
                                 </td>
                                 <td><?= $biodata['phone']; ?></td>
                                 <td style="white-space: initial;"><?= $biodata['address']; ?></td>
@@ -97,7 +99,12 @@ Dashboard
                                                                                 <label for="basicInput">Alamat Asal</label>
                                                                                 <input type="text" class="form-control" id="occupant-address-<?= $occupant['id']; ?>" placeholder="JL. Suka Maju, Denpasar" value="<?= $biodata['address']; ?>">
                                                                             </div>
-
+                                                                        </div>
+                                                                        <div class="col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="basicInput">Password</label>
+                                                                                <input type="password" class="form-control" id="occupant-password-<?= $occupant['id']; ?>" placeholder="Secret ..">
+                                                                            </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="mb-3">
@@ -169,18 +176,20 @@ Dashboard
 <?= $this->section('content-script') ?>
     <script>
         $('.save-occupant').on('click', function () {
-            var occupantId      = $(this).data('occupant-id');
-            var occupantName    = $('#occupant-name-' + occupantId);
-            var occupantJob     = $('#occupant-job-' + occupantId);
-            var occupantPhone   = $('#occupant-phone-' + occupantId);
-            var occupantAddress = $('#occupant-address-' + occupantId);
-            var idCardPhoto     = $('#occupant-file-' + occupantId);
+            var occupantId       = $(this).data('occupant-id');
+            var occupantName     = $('#occupant-name-' + occupantId);
+            var occupantJob      = $('#occupant-job-' + occupantId);
+            var occupantPhone    = $('#occupant-phone-' + occupantId);
+            var occupantAddress  = $('#occupant-address-' + occupantId);
+            var occupantPassword = $('#occupant-password-' + occupantId);
+            var idCardPhoto      = $('#occupant-file-' + occupantId);
 
             var form = new FormData();
             form.append('name', occupantName.val());
             form.append('job', occupantJob.val());
             form.append('phone', occupantPhone.val());
             form.append('address', occupantAddress.val());
+            form.append('password', occupantPassword.val());
             form.append('identity_card', idCardPhoto[0].files.length > 0 ? idCardPhoto[0].files[0] : null);
             form.append('_method', 'PUT');
 

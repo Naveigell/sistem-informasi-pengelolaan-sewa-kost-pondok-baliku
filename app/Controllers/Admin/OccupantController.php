@@ -32,6 +32,9 @@ class OccupantController extends BaseController
             'address' => [
                 'rules' => 'required',
             ],
+            'password' => [
+                'rules' => 'permit_empty',
+            ],
         ];
 
         if ($identityCardPhoto) {
@@ -57,6 +60,13 @@ class OccupantController extends BaseController
             }
 
             (new User())->builder()->where('id', $userId)->update($this->request->getVar(['name']));
+
+            if ($this->request->getVar('password')) {
+                (new User())->builder()->where('id', $userId)->update([
+                    "password" => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                ]);
+            }
+
             (new Biodata())->builder()->where('user_id', $userId)
                            ->update($this->request->getVar(['job', 'phone', 'address']));
 

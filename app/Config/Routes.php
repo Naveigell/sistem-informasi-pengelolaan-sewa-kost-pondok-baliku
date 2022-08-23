@@ -58,6 +58,9 @@ $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
     $routes->put('payments/verifications/(:num)', 'Admin\PaymentController::verficiationUpdate/$1', ["as" => "admin.payments.verifications.update"]);
 
     $routes->get('payments/histories', 'Admin\PaymentController::historyIndex', ["as" => "admin.payments.histories.index"]);
+
+    $routes->get('accounts', 'Admin\AccountController::index', ["as" => "admin.accounts.index"]);
+    $routes->put('accounts/password', 'Admin\AccountController::password', ["as" => "admin.accounts.password.update"]);
 });
 
 $routes->group('member', ['filter' => 'memberfilter'], function ($routes) {

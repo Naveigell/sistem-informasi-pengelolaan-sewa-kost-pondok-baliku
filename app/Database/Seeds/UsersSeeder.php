@@ -11,28 +11,41 @@ class UsersSeeder extends Seeder
     {
         $data = [
             [
-                'username' => 'admin123',
+                'username' => 'admin',
                 'name'     => 'admin',
                 'email'    => 'admin@gmail.com',
-                'password' => password_hash(123456, PASSWORD_DEFAULT),
+                'password' => password_hash("PondokAdminBaliku", PASSWORD_DEFAULT),
                 'role'     => User::ROLE_ADMIN,
             ],
-            [
-                'username' => 'member',
-                'name'     => 'member',
-                'email'    => 'member@gmail.com',
-                'password' => password_hash(123456, PASSWORD_DEFAULT),
-                'role'     => User::ROLE_MEMBER,
-            ],
-            [
-                'username' => 'member123',
-                'name'     => 'member123',
-                'email'    => 'member123@gmail.com',
-                'password' => password_hash(123456, PASSWORD_DEFAULT),
-                'role'     => User::ROLE_MEMBER,
-            ],
+//            [
+//                'username' => 'member',
+//                'name'     => 'member',
+//                'email'    => 'member@gmail.com',
+//                'password' => password_hash(123456, PASSWORD_DEFAULT),
+//                'role'     => User::ROLE_MEMBER,
+//            ],
+//            [
+//                'username' => 'member123',
+//                'name'     => 'member123',
+//                'email'    => 'member123@gmail.com',
+//                'password' => password_hash(123456, PASSWORD_DEFAULT),
+//                'role'     => User::ROLE_MEMBER,
+//            ],
         ];
 
         (new User())->insertBatch($data);
+
+        for ($i = 1; $i <= 15; $i++) {
+
+            $number = str_pad((string) $i, 2, '0', STR_PAD_LEFT);
+
+            (new User())->insert([
+                "username" => "pondokbaliku{$number}",
+                "name"     => "Pondok Baliku {$number}",
+                "email"    => "room{$number}@pondokbaliku.com",
+                "password" => password_hash("Pondok01baliku", PASSWORD_DEFAULT),
+                "role"     => User::ROLE_MEMBER,
+            ]);
+        }
     }
 }

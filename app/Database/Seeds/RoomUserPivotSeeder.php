@@ -15,13 +15,11 @@ class RoomUserPivotSeeder extends Seeder
         $rooms  = (new Room())->findAll();
         $pivot  = new RoomUserPivot();
 
-        foreach ($rooms as $room) {
-            $active = rand(1, 10) < 5;
-
+        foreach ($rooms as $index => $room) {
             $pivot->insert([
                 "room_id"   => $room['id'],
-                "user_id"   => $active ? $users[array_rand($users)]['id'] : null,
-                "is_active" => $active,
+                "user_id"   => $users[$index]['id'],
+                "is_active" => 1,
             ]);
         }
     }

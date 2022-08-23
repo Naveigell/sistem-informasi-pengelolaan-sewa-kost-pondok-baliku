@@ -28,6 +28,7 @@
                         <li>
                             <h6 class="dropdown-header"><?= session('user')->name; ?></h6>
                         </li>
+                        <li><a class="dropdown-item" href="<?= route_to('admin.accounts.index'); ?>"><i class="icon-mid bi bi-people me-2"></i> Akun</a></li>
                         <li><a class="dropdown-item" href="<?= route_to('logout'); ?>"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
                     </ul>
                 </div><br>
