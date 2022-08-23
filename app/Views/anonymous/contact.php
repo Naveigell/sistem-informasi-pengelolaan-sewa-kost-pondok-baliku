@@ -50,7 +50,7 @@
 </nav>
 <!-- END nav -->
 
-<div class="hero-wrap" style="background-image: url('images/bg_1.jpg');">
+<div class="hero-wrap" style="background-image: url(<?= base_url('anonymous/images/bg_1.jpg') ?>);">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
