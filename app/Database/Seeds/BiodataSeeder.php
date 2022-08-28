@@ -18,7 +18,7 @@ class BiodataSeeder extends Seeder
             $biodata->insert([
                 "user_id"       => $user['id'],
                 "job"           => $jobs[array_rand($jobs)],
-                "identity_card" => rand(111111111, 999999999),
+                "identity_card" => '',
                 "phone"         => "08" . rand(1111111111, 9999999999),
                 "address"       => $this->str_random(20),
             ]);

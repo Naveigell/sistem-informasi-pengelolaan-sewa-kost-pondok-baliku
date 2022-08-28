@@ -76,7 +76,7 @@
                                 <div class="room-img" style="background-image: url(<?= base_url('anonymous/images/b-1.jpg') ?>);"></div>
                             </div>
                             <div class="item">
-                                <div class="room-img" style="background-image: url(<?= base_url('anonymous/images/b-2.jpg') ?>);"></div>
+                                <div class="room-img" style="background-image: url(<?= base_url('anonymous/images/b-2.jpg') ?>); background-size: auto 100%;"></div>
                             </div>
                             <div class="item">
                                 <div class="room-img" style="background-image: url(<?= base_url('anonymous/images/b-3.jpg') ?>);"></div>
@@ -91,9 +91,46 @@
 
                         <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
                     </div>
+                    <div class="col-12 room-single mt-4 mb-5 ftco-animate">
+                        <h4 class="mb-4">Kamar Kosong Yang tersedia</h4>
+                        <?php
+                        /**
+                         * @var array $rooms
+                         */
+                        ?>
+                        <div class="row">
+                            <table class="table">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nomor Kamar</th>
+                                    <th scope="col">Harga Sewa</th>
+                                    <th scope="col">Durasi</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($rooms as $index => $room): ?>
 
+                                    <?php
+                                    $duration = (new \App\Models\RoomRentDuration())->where('id', $room['room_rent_duration_id'])->first();
+                                    ?>
 
-
+                                    <tr>
+                                        <th scope="row"><?= $index + 1; ?></th>
+                                        <td><?= $room['room_number']; ?></td>
+                                        <td><?= format_currency($room['price']); ?></td>
+                                        <td><?= $duration['name']; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                            <small class="text text-muted text-sm text">* Silakan memesan pada form di bawah</small>
+                        </div>
+                    </div>
+                    <div class="col-12 room-single mt-4 mb-5 ftco-animate">
+                        <h4 class="mb-4">Form Pemesanan Kamar</h4>
+                        <?= $this->include('anonymous/includes/rent_form'); ?>
+                    </div>
                     <div class="col-md-12 room-single ftco-animate mb-5 mt-5">
                         <h4 class="mb-4">Pilihan Lainnya&nbsp;</h4>
                         <div class="row">

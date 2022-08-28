@@ -37,6 +37,10 @@ class CreateComplaintsTable extends Migration
                 'type' => 'TEXT',
                 'null' => true,
             ],
+            'reply' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
             'status' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,

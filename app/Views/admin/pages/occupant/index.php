@@ -35,17 +35,25 @@ Dashboard
                                 $biodata = (new \App\Models\Biodata())->where('user_id', $occupant['id'])->first();
                                 $pivot   = (new \App\Models\RoomUserPivot())->where('user_id', $occupant['id'])->first();
 
-                                $room    = (new \App\Models\Room())->where('id', $pivot['room_id'])->first();
+                                $room = null;
+
+                                if ($pivot) {
+                                    $room = (new \App\Models\Room())->where('id', $pivot['room_id'])->first();
+                                }
                             ?>
 
                             <tr>
-                                <td><?= $room['room_number']; ?></td>
+                                <td><?= $room['room_number'] ?? '-'; ?></td>
                                 <td class="text-bold-500"><?= $occupant['name']; ?></td>
                                 <td><?= $biodata['job']; ?></td>
                                 <td class="text-bold-500">
-                                    <a href="<?= base_url('uploads/images/occupants') . DIRECTORY_SEPARATOR . $biodata['identity_card']; ?>" class="image-zoom">
-                                        <img src="<?= base_url('uploads/images/occupants') . DIRECTORY_SEPARATOR . $biodata['identity_card']; ?>" alt="" style="width: 150px; height: 150px;">
-                                    </a>
+                                    <?php if ($biodata['identity_card']): ?>
+                                        <a href="<?= base_url('uploads/images/occupants') . DIRECTORY_SEPARATOR . $biodata['identity_card']; ?>" class="image-zoom">
+                                            <img src="<?= base_url('uploads/images/occupants') . DIRECTORY_SEPARATOR . $biodata['identity_card']; ?>" alt="" style="width: 150px; height: 150px;">
+                                        </a>
+                                    <?php else: ?>
+                                        -
+                                    <?php endif; ?>
                                 </td>
                                 <td><?= $biodata['phone']; ?></td>
                                 <td style="white-space: initial;"><?= $biodata['address']; ?></td>
@@ -74,7 +82,7 @@ Dashboard
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="basicInput">No. Kamar</label>
-                                                                                <input type="text" class="form-control" id="basicInput" placeholder="Nama Penghuni" value="<?= $room['room_number']; ?>" disabled>
+                                                                                <input type="text" class="form-control" id="basicInput" placeholder="Nomor Kamar" value="<?= $room['room_number'] ?? '-'; ?>" disabled>
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <label for="basicInput">Pekerjaan</label>
@@ -110,6 +118,12 @@ Dashboard
                                                                             <div class="mb-3">
                                                                                 <label for="formFile" class="form-label">Unggah Foto KTP</label>
                                                                                 <input class="form-control" type="file" id="occupant-file-<?= $occupant['id']; ?>">
+                                                                                <div class="form-check mt-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="" id="remove-image" name="remove_image">
+                                                                                    <label class="form-check-label" for="remove-image">
+                                                                                        Hapus gambar
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
 
                                                                         </div>
@@ -183,6 +197,7 @@ Dashboard
             var occupantAddress  = $('#occupant-address-' + occupantId);
             var occupantPassword = $('#occupant-password-' + occupantId);
             var idCardPhoto      = $('#occupant-file-' + occupantId);
+            var removeImage      = $('#remove-image');
 
             var form = new FormData();
             form.append('name', occupantName.val());
@@ -191,6 +206,7 @@ Dashboard
             form.append('address', occupantAddress.val());
             form.append('password', occupantPassword.val());
             form.append('identity_card', idCardPhoto[0].files.length > 0 ? idCardPhoto[0].files[0] : null);
+            form.append('remove_image', removeImage.is(':checked'));
             form.append('_method', 'PUT');
 
             $.ajax({

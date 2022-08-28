@@ -16,12 +16,13 @@ class PaymentController extends BaseController
 
     public function verficiationUpdate($paymentId)
     {
-        if (!in_array($this->request->getVar('status'), [Payment::STATUS_PAID_OFF, Payment::STATUS_REJECTED])) {
+        if (!in_array($this->request->getVar('status'), [1, 0])) {
             return redirect()->back();
         }
 
         (new Payment())->update($paymentId, [
-            "status" => $this->request->getVar('status'),
+            "status" => $this->request->getVar('status') == 1 ? Payment::STATUS_PAID_OFF : Payment::STATUS_REJECTED,
+            "reply"  => $this->request->getVar('reply') ?: null,
         ]);
 
         return redirect()->route('admin.payments.verifications.index');

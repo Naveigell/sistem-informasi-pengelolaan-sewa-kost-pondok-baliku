@@ -114,6 +114,7 @@ Complaint
                             <th>No Kamar</th>
                             <th>Tanggal Keluhan</th>
                             <th>Pesan Keluhan</th>
+                            <th>Balasan Admin</th>
                             <th>Nama Penghuni</th>
                             <th>Gambar Lampiran</th>
                             <th>Status Keluhan</th>
@@ -125,6 +126,7 @@ Complaint
                                 <td class="text-bold-100"><?= $room['room_number']; ?></td>
                                 <td><?= date('d/m/Y', strtotime($complaint['complaint_date'])); ?></td>
                                 <td class="text-bold-100"><?= $complaint['description'] ?: '-'; ?></td>
+                                <td><?= $complaint['reply'] ?? '-'; ?></td>
                                 <td><?= session()->get('user')->name; ?></td>
                                 <td>
                                     <a href="<?= base_url('uploads/images/complaints') . DIRECTORY_SEPARATOR . $complaint['proof']; ?>" class="image-zoom">
@@ -134,6 +136,8 @@ Complaint
                                 <td>
                                     <?php if ($complaint['status'] == \App\Models\Complaint::STATUS_FINISHED): ?>
                                         <span class="badge bg-success">Selesai</span>
+                                    <?php elseif ($complaint['status'] == \App\Models\Complaint::STATUS_REJECTED): ?>
+                                        <span class="badge bg-danger">Ditolak</span>
                                     <?php else: ?>
                                         <span class="badge bg-warning">Sedang Di Proses</span>
                                     <?php endif; ?>

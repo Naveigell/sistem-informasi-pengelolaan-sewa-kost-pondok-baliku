@@ -29,7 +29,7 @@ class LoginController extends BaseController
         }
 
         $user = (object) (new User())->where('username', $this->request->getVar('username'))->first();
-        if (!$user) {
+        if (!$user || !property_exists($user, 'id')) {
             $validator->setError('auth', 'User not found');
 
             return redirect()->route('login.index')->withInput()->with('errors', $validator->getErrors());

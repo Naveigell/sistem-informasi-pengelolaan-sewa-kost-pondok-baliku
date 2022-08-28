@@ -38,6 +38,7 @@ Payment
                         <th>Tipe Kamar</th>
                         <th>Fasilitas</th>
                         <th>Metode Pembayaran</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,6 +69,15 @@ Payment
                                 <td><?= $roomType['name'] ?: '-'; ?></td>
                                 <td><?= join(', ', array_column($activeFacilities, 'facility_name')); ?></td>
                                 <td><?= ucwords($payment['payment_type']); ?></td>
+                                <td>
+                                    <?php if ($payment['status'] == \App\Models\Payment::STATUS_PAID_OFF): ?>
+                                        <span class="badge bg-success">Lunas</span>
+                                    <?php elseif ($payment['status'] == \App\Models\Payment::STATUS_UNVERIFIED): ?>
+                                        <span class="badge bg-warning">Belum Diverifikasi</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-danger">Ditolak</span>
+                                    <?php endif; ?>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -57,6 +57,10 @@ class OccupantController extends BaseController
                 $image->move(ROOTPATH . 'public/uploads/images/occupants', $imageName);
 
                 (new Biodata())->builder()->where('user_id', $userId)->update(["identity_card" => $imageName]);
+
+            } else if ($this->request->getVar('remove_image') == 'true') {
+
+                (new Biodata())->builder()->where('user_id', $userId)->update(["identity_card" => '']);
             }
 
             (new User())->builder()->where('id', $userId)->update($this->request->getVar(['name']));

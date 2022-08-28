@@ -134,6 +134,7 @@
                             <th>Bukti Pembayaran</th>
                             <th>Tipe Pembayaran</th>
                             <th>Deskripsi</th>
+                            <th>Balasan Admin</th>
                             <th>Keterangan</th>
                         </tr>
                         </thead>
@@ -151,6 +152,7 @@
                                     </td>
                                     <td><?= ucwords($payment['payment_type']); ?></td>
                                     <td><?= $payment['description'] ?: '-'; ?></td>
+                                    <td><?= $payment['reply'] ?: '-'; ?></td>
                                     <td>
                                         <?php if ($payment['status'] == \App\Models\Payment::STATUS_PAID_OFF): ?>
                                             <span class="badge bg-success">Lunas</span>

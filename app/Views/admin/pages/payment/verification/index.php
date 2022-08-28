@@ -62,11 +62,13 @@ Payment
                             <td><?= ucwords($payment['payment_type']); ?></td>
                             <td><?= $payment['description'] ?: '-'; ?></td>
                             <td>
-                                <form method="post" action="<?= route_to('admin.payments.verifications.update', $payment['id']); ?>">
+                                <form method="post" action="<?= route_to('admin.payments.verifications.update', $payment['id']); ?>" id="form-payment-<?= $payment['id']; ?>">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" value="PUT" name="_method">
-                                    <button name="status" value="<?= \App\Models\Payment::STATUS_PAID_OFF; ?>" class="btn btn-sm icon icon-left btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Terima</button>
-                                    <button name="status" value="<?= \App\Models\Payment::STATUS_REJECTED; ?>" class="btn btn-sm icon icon-left btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>Tolak</button>
+                                    <input type="hidden" value="" name="reply" id="form-payment-reply-<?= $payment['id']; ?>">
+                                    <input type="hidden" value="" id="form-payment-status-<?= $payment['id']; ?>" name="status">
+                                    <button type="button" data-payment-id="<?= $payment['id']; ?>" name="status" class="btn-approve btn btn-sm icon icon-left btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Terima</button>
+                                    <button type="button" data-payment-id="<?= $payment['id']; ?>" name="status" class="btn-reject btn btn-sm icon icon-left btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>Tolak</button>
                                 </form>
                             </td>
                         </tr>
@@ -101,5 +103,38 @@ Payment
 <?= $this->endSection() ?>
 
 <?= $this->section('content-script') ?>
+<script>
+    $('.btn-approve').on('click', function () {
+        var paymentId = $(this).data('payment-id');
 
+        process(paymentId, 1);
+    });
+
+    $('.btn-reject').on('click', function () {
+        var paymentId = $(this).data('payment-id');
+
+        process(paymentId, 0);
+    });
+
+    function process(paymentId, status) {
+        var reply = $('#form-payment-reply-' + paymentId);
+
+        $('#form-payment-status-' + paymentId).val(status);
+
+        Swal.fire({
+            title: 'Yakin ' + (status === 1 ? 'selesai' : 'tolak') + ' ?',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off',
+            },
+            inputLabel: 'Ketik balasan disini',
+            confirmButtonText: 'Simpan',
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                reply.val(result.value);
+                $('#form-payment-' + paymentId).submit();
+            }
+        });
+    }
+</script>
 <?= $this->endSection() ?>

@@ -35,6 +35,7 @@ Complaint
                         <th>Pesan Keluhan</th>
                         <th>Nama Penghuni</th>
                         <th>Gambar Lampiran</th>
+                        <th>Balasan Admin</th>
                         <th>Status Keluhan</th>
                     </tr>
                     </thead>
@@ -57,14 +58,20 @@ Complaint
                                     <img src="<?= base_url('uploads/images/complaints') . DIRECTORY_SEPARATOR . $complaint['proof']; ?>" alt="" style="width: 150px; height: 150px;">
                                 </a>
                             </td>
+                            <td><?= $complaint['reply'] ?? '-'; ?></td>
                             <td>
                                 <?php if ($complaint['status'] == \App\Models\Complaint::STATUS_FINISHED): ?>
-                                    -
+                                    <span class="badge bg-success">Selesai</span>
+                                <?php elseif ($complaint['status'] == \App\Models\Complaint::STATUS_REJECTED): ?>
+                                    <span class="badge bg-danger">Ditolak</span>
                                 <?php else: ?>
-                                    <form method="post" action="<?= route_to('admin.complaints.update', $complaint['id']); ?>">
+                                    <form method="post" action="<?= route_to('admin.complaints.update', $complaint['id']); ?>" id="form-complaint-<?= $complaint['id']; ?>">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" value="PUT" name="_method">
-                                        <button type="submit" class="btn-sm btn icon icon-left btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Selesai </button>
+                                        <input type="hidden" value="" name="reply" id="form-complaint-reply-<?= $complaint['id']; ?>">
+                                        <input type="hidden" value="" name="status" id="form-complaint-status-<?= $complaint['id']; ?>">
+                                        <button type="button" data-complaint-id="<?= $complaint['id']; ?>" class="btn-finish btn-sm btn icon icon-left btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Selesai </button>
+                                        <button type="button" data-complaint-id="<?= $complaint['id']; ?>" class="btn-reject btn-sm btn icon icon-left btn-danger"> Tolak </button>
                                     </form>
                                 <?php endif; ?>
                             </td>
@@ -101,28 +108,37 @@ Complaint
 
 <?= $this->section('content-script') ?>
 <script>
-    $('.btn-add').on('click', function () {
-        var description  = $('#description');
-        var proof        = $('#proof');
+    $('.btn-finish').on('click', function () {
+        var complaintId = $(this).data('complaint-id');
 
-        var form = new FormData();
-        form.append('room_id', '<?= $room["id"]; ?>');
-        form.append('description', description.val());
-        form.append('proof', proof[0].files.length > 0 ? proof[0].files[0] : null);
+        process(complaintId, 1);
+    });
 
-        $.ajax({
-            url: '<?= route_to("admin.complaints.store"); ?>',
-            type: 'POST',
-            data: form,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                window.location.reload();
+    $('.btn-reject').on('click', function () {
+        var complaintId = $(this).data('complaint-id');
+
+        process(complaintId, 0);
+    });
+
+    function process(complaintId, status) {
+        var reply = $('#form-complaint-reply-' + complaintId);
+
+        $('#form-complaint-status-' + complaintId).val(status);
+
+        Swal.fire({
+            title: 'Yakin ' + (status === 1 ? 'selesai' : 'tolak') + ' ?',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off',
             },
-            error: function (response) {
-                render_errors($("#error-messages"), JSON.parse(response.responseText));
+            inputLabel: 'Ketik balasan disini',
+            confirmButtonText: 'Simpan',
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                reply.val(result.value);
+                $('#form-complaint-' + complaintId).submit();
             }
         });
-    })
+    }
 </script>
 <?= $this->endSection() ?>

@@ -40,7 +40,6 @@ $routes->post('/login', 'Auth\LoginController::store', ["as" => "login.store"]);
 $routes->get('/register', 'Auth\RegisterController::index', ["as" => "register.index"]);
 $routes->post('/register', 'Auth\RegisterController::store', ["as" => "register.store"]);
 $routes->get('/logout', 'Auth\LogoutController::index', ["as" => "logout"]);
-$routes->get('/test', 'Home::template');
 
 $routes->group('', ['filter' => 'anonymousfilter'], function ($routes) {
     $routes->get('/', 'Anonymous\LandingPageController::index', ["as" => "anonymous.index"]);
@@ -48,6 +47,7 @@ $routes->group('', ['filter' => 'anonymousfilter'], function ($routes) {
     $routes->get('/roomB', 'Anonymous\RoomController::roomB', ["as" => "anonymous.rooms-b.index"]);
     $routes->get('/roomC', 'Anonymous\RoomController::roomC', ["as" => "anonymous.rooms-c.index"]);
     $routes->get('/contacts', 'Anonymous\ContactController::index', ["as" => "anonymous.contacts.index"]);
+    $routes->post('/rent', 'Anonymous\ApplicantController::store', ["as" => "anonymous.applicants.store"]);
 });
 
 $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
@@ -58,6 +58,10 @@ $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
 
     $routes->get('occupants', 'Admin\OccupantController::index', ["as" => "admin.occupants.index"]);
     $routes->put('occupants/(:num)', 'Admin\OccupantController::update/$1', ["as" => "admin.occupants.update"]);
+
+    $routes->get('applicants', 'Admin\ApplicantController::index', ["as" => "admin.applicants.index"]);
+    $routes->put('applicants/(:num)/approve', 'Admin\ApplicantController::approve/$1', ["as" => "admin.applicants.approve"]);
+    $routes->put('applicants/(:num)/reject', 'Admin\ApplicantController::reject/$1', ["as" => "admin.applicants.reject"]);
 
     $routes->get('complaints', 'Admin\ComplaintController::index', ["as" => "admin.complaints.index"]);
     $routes->put('complaints/(:num)', 'Admin\ComplaintController::update/$1', ["as" => "admin.complaints.update"]);

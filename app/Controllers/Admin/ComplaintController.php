@@ -17,7 +17,8 @@ class ComplaintController extends BaseController
     public function update($complaintId)
     {
         (new Complaint())->update($complaintId, [
-            "status" => Complaint::STATUS_FINISHED,
+            "status" => $this->request->getVar('status') == 1 ? Complaint::STATUS_FINISHED : Complaint::STATUS_REJECTED,
+            "reply"  => $this->request->getVar('reply') ?: null,
         ]);
 
         return redirect()->route('admin.complaints.index')->with('success', 'Status berhasil diubah');

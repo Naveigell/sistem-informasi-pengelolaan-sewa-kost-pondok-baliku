@@ -66,6 +66,13 @@
                         <span>Pesan Komplain</span>
                     </a>
                 </li>
+
+                <li class="sidebar-item <?= exists_in_segment(['applicants']) ? 'active' : ''; ?>">
+                    <a href="<?= route_to('admin.applicants.index'); ?>" class="sidebar-link">
+                        <i class="bi bi-signpost-fill"></i>
+                        <span>Pelamar</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>

@@ -15,5 +15,5 @@ class Payment extends Model
     const TYPE_CASH     = 'cash';
     const TYPE_TRANSFER = 'transfer';
 
-    protected $allowedFields = ['room_id', 'user_id', 'payment_date', 'payment_type', 'proof', 'description', 'status'];
+    protected $allowedFields = ['room_id', 'user_id', 'payment_date', 'payment_type', 'proof', 'description', 'reply', 'status'];
 }
