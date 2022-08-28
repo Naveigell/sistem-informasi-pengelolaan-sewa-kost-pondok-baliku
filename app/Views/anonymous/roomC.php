@@ -118,19 +118,26 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($rooms as $index => $room): ?>
 
-                                    <?php
-                                    $duration = (new \App\Models\RoomRentDuration())->where('id', $room['room_rent_duration_id'])->first();
-                                    ?>
+                                <?php if (count($rooms) > 0): ?>
+                                    <?php foreach ($rooms as $index => $room): ?>
 
+                                        <?php
+                                        $duration = (new \App\Models\RoomRentDuration())->where('id', $room['room_rent_duration_id'])->first();
+                                        ?>
+
+                                        <tr>
+                                            <th scope="row"><?= $index + 1; ?></th>
+                                            <td><?= $room['room_number']; ?></td>
+                                            <td><?= format_currency($room['price']); ?></td>
+                                            <td><?= $duration['name']; ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
                                     <tr>
-                                        <th scope="row"><?= $index + 1; ?></th>
-                                        <td><?= $room['room_number']; ?></td>
-                                        <td><?= format_currency($room['price']); ?></td>
-                                        <td><?= $duration['name']; ?></td>
+                                        <td colspan="4" class="text-center">Tidak ada kamar kosong</td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php endif; ?>
                                 </tbody>
                             </table>
                             <small class="text text-muted text-sm text">* Silakan memesan pada form di bawah</small>

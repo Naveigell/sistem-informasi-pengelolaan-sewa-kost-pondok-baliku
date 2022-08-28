@@ -37,6 +37,10 @@ class RoomController extends BaseController
             return $room['room_id'];
         }, $pivot);
 
+        if (count($roomIds) <= 0) {
+            return [];
+        }
+
         return (new Room())->whereIn('id', $roomIds)->findAll();
     }
 }
