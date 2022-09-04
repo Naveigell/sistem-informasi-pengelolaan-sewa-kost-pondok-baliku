@@ -21,6 +21,7 @@
                                 <th>Nama</th>
                                 <th>Tipe Kamar</th>
                                 <th>Fasilitas</th>
+                                <th>Foto KTP</th>
                                 <th>Bukti Pembayaran</th>
                                 <th>Total Bayar</th>
                                 <th>Aksi</th>
@@ -57,6 +58,11 @@
                                     <td class="text-bold-500"><?= $user['name']; ?></td>
                                     <td><?= $roomType['name']; ?></td>
                                     <td><?= join(', ', array_column($facilities, 'facility_name')); ?></td>
+                                    <td>
+                                        <a href="<?= base_url('uploads/images/occupants') . DIRECTORY_SEPARATOR . $biodata['identity_card']; ?>" class="image-zoom">
+                                            <img src="<?= base_url('uploads/images/occupants') . DIRECTORY_SEPARATOR . $biodata['identity_card']; ?>" alt="" style="width: 150px; height: 150px;">
+                                        </a>
+                                    </td>
                                     <td>
                                         <a href="<?= base_url('uploads/images/payments') . DIRECTORY_SEPARATOR . $payment['proof']; ?>"
                                            class="image-zoom">
@@ -119,6 +125,17 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content-script') ?>
+
+<?php if ($failed = session()->get('failed')): ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '<?= $failed; ?>',
+        })
+    </script>
+<?php endif; ?>
+
     <script>
         $('.btn-confirmation').on('click', function () {
 

@@ -95,6 +95,10 @@ $routes->group('applicant', ['filter' => 'applicantfilter'], function ($routes) 
 
     $routes->get('bookings', 'Applicant\BookingController::index', ["as" => "applicant.bookings.index"]);
     $routes->post('bookings', 'Applicant\BookingController::store', ["as" => "applicant.bookings.store"]);
+
+    $routes->get('accounts', 'Applicant\AccountController::index', ["as" => "applicant.accounts.index"]);
+    $routes->post('accounts', 'Applicant\AccountController::update', ["as" => "applicant.accounts.update"]);
+    $routes->put('accounts/password', 'Applicant\AccountController::password', ["as" => "applicant.accounts.password.update"]);
 });
 
 /*
