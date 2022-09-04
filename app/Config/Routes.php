@@ -85,6 +85,18 @@ $routes->group('member', ['filter' => 'memberfilter'], function ($routes) {
     $routes->post('complaints', 'Member\ComplaintController::store', ["as" => "member.complaints.store"]);
 });
 
+$routes->group('applicant', ['filter' => 'applicantfilter'], function ($routes) {
+    $routes->get('dashboards', 'Applicant\DashboardController::index', ["as" => "applicant.dashboards.index"]);
+
+    $routes->get('payments', 'Applicant\PaymentController::index', ["as" => "applicant.payments.index"]);
+
+    $routes->get('payments/(:num)/booking', 'Applicant\PaymentController::create/$1', ["as" => "applicant.payments.create"]);
+    $routes->post('payments/(:num)/booking', 'Applicant\PaymentController::store/$1', ["as" => "applicant.payments.store"]);
+
+    $routes->get('bookings', 'Applicant\BookingController::index', ["as" => "applicant.bookings.index"]);
+    $routes->post('bookings', 'Applicant\BookingController::store', ["as" => "applicant.bookings.store"]);
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

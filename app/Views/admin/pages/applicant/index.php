@@ -19,44 +19,68 @@
                             <thead>
                             <tr>
                                 <th>Nama</th>
-                                <th>Pekerjaan</th>
-                                <th>No. Telpon</th>
-                                <th>Alamat Asal</th>
+                                <th>Tipe Kamar</th>
+                                <th>Fasilitas</th>
+                                <th>Bukti Pembayaran</th>
+                                <th>Total Bayar</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php /** @var array $applicants */
-                            foreach ($applicants as $applicant): ?>
+                            <?php /** @var array $bookings */
+                            foreach ($bookings as $booking): ?>
+
+                                <?php
+                                    $user              = (new \App\Models\User())->where('id', $booking['user_id'])->first();
+                                    $biodata           = (new \App\Models\Biodata())->where('user_id', $user['id'])->first();
+                                    $roomType          = (new \App\Models\RoomType())->where('id', $booking['room_type_id'])->first();
+                                    $payment           = (new \App\Models\ApplicantRequestRoomPayment())->where('room_id', $booking['id'])->first();
+                                    $requestFacilities = (new \App\Models\ApplicantFacility())->where('applicant_request_room_id', $booking['id'])->findAll();
+
+                                    $facilities        = [];
+
+                                    if (!$payment) {
+                                        continue;
+                                    }
+
+                                    if (count($requestFacilities) > 0) {
+
+                                        $ids = array_map(function ($facility) {
+                                            return $facility['room_facility_id'];
+                                        }, $requestFacilities);
+
+                                        $facilities = (new \App\Models\RoomFacility())->whereIn('id', $ids)->findAll();
+                                    }
+                                ?>
 
                                 <tr>
-                                    <td class="text-bold-500"><?= $applicant['name']; ?></td>
-                                    <td><?= $applicant['job']; ?></td>
+                                    <td class="text-bold-500"><?= $user['name']; ?></td>
+                                    <td><?= $roomType['name']; ?></td>
+                                    <td><?= join(', ', array_column($facilities, 'facility_name')); ?></td>
                                     <td>
-                                        <?php if ($applicant['is_approved'] == 1): ?>
-                                            <a target="_blank" href="https://wa.me/<?= $applicant['phone']; ?>" class=""><?= $applicant['phone']; ?></a>
-                                        <?php else: ?>
-                                            <?= $applicant['phone']; ?>
-                                        <?php endif; ?>
+                                        <a href="<?= base_url('uploads/images/payments') . DIRECTORY_SEPARATOR . $payment['proof']; ?>"
+                                           class="image-zoom">
+                                            <img src="<?= base_url('uploads/images/payments') . DIRECTORY_SEPARATOR . $payment['proof']; ?>" alt="" style="width: 150px; height: 150px;">
+                                        </a>
                                     </td>
-                                    <td style="white-space: initial;"><?= $applicant['address']; ?></td>
+                                    <td style="white-space: initial;"><?= format_currency($booking['total']); ?></td>
                                     <td>
-                                        <?php if ($applicant['is_approved'] == 0): ?>
-                                            <button type="button" class="btn-confirmation btn btn-sm btn-outline-primary block" data-applicant-id="<?= $applicant['id']; ?>">
+                                        <?php if ($payment && $payment['status'] == \App\Models\ApplicantRequestRoomPayment::STATUS_UNVERIFIED): ?>
+                                            <button type="button" class="btn-confirmation btn btn-sm btn-outline-primary block" data-booking-id="<?= $booking['id']; ?>">
                                                 Konfirmasi
                                             </button>
-                                            <button type="button" class="btn-reject btn btn-sm btn-outline-danger block" data-applicant-id="<?= $applicant['id']; ?>">
+                                            <button type="button" class="btn-reject btn btn-sm btn-outline-danger block" data-booking-id="<?= $booking['id']; ?>">
                                                 Tolak
                                             </button>
-                                            <form method="post" action="<?= route_to('admin.applicants.approve', $applicant['id']); ?>" class="d-none" id="form-approve-<?= $applicant['id']; ?>">
+                                            <form method="post" action="<?= route_to('admin.applicants.approve', $booking['id']); ?>" class="d-none" id="form-approve-<?= $booking['id']; ?>">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" value="PUT" name="_method">
                                             </form>
-                                            <form method="post" action="<?= route_to('admin.applicants.reject', $applicant['id']); ?>" class="d-none" id="form-reject-<?= $applicant['id']; ?>">
+                                            <form method="post" action="<?= route_to('admin.applicants.reject', $booking['id']); ?>" class="d-none" id="form-reject-<?= $booking['id']; ?>">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" value="PUT" name="_method">
                                             </form>
-                                        <?php elseif ($applicant['is_approved'] == 1): ?>
+                                        <?php elseif ($payment['status'] == \App\Models\ApplicantRequestRoomPayment::STATUS_PAID_OFF): ?>
                                             <span class="badge bg-success">Diterima</span>
                                         <?php else: ?>
                                             <span class="badge bg-danger">Ditolak</span>
@@ -98,7 +122,7 @@
     <script>
         $('.btn-confirmation').on('click', function () {
 
-            var id   = $(this).data('applicant-id');
+            var id   = $(this).data('booking-id');
             var form = $('#form-approve-' + id);
 
             Swal.fire({
@@ -116,7 +140,7 @@
 
         $('.btn-reject').on('click', function () {
 
-            var id   = $(this).data('applicant-id');
+            var id   = $(this).data('booking-id');
             var form = $('#form-reject-' + id);
 
             Swal.fire({

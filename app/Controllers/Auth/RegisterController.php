@@ -3,6 +3,8 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\BaseController;
+use App\Models\Applicant;
+use App\Models\Biodata;
 use App\Models\User;
 
 class RegisterController extends BaseController
@@ -28,34 +30,31 @@ class RegisterController extends BaseController
             'password' => [
                 'rules' => 'required',
             ],
+            'phone' => [
+                'rules' => 'required',
+            ],
         ]);
 
         if (!$validator->run($this->request->getVar())) {
             return redirect()->route('register.index')->withInput()->with('errors', $validator->getErrors());
         }
 
-        $user = (new User())->where('email', $this->request->getVar('email'))
-                            ->orWhere('username', $this->request->getVar('username'))
-                            ->first();
-
-        if ($user) {
-            $validator->setError('auth', 'User already exists');
-
-            return redirect()->route('register.index')->withInput()->with('errors', $validator->getErrors());
-        }
-
         try {
-            (new User())->insert([
-                'name'     => $this->request->getVar('name'),
-                'username' => $this->request->getVar('username'),
-                'email'    => $this->request->getVar('email'),
+
+            $user = new User();
+            $user->insert(array_merge($this->request->getVar(), [
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-                'role'     => User::ROLE_MEMBER,
-            ]);
+                'role'     => User::ROLE_APPLICANT,
+            ]));
+
+            (new Biodata())->insert(array_merge($this->request->getVar(), [
+                "user_id" => $user->getInsertID(),
+            ]));
+
         } catch (\ReflectionException $e) {
             var_dump($e->getMessage());
         }
 
-        return redirect()->route('member.auth.login.index')->withInput()->with('success', 'Register berhasil, silakan melakukan login');
+        return redirect()->route('login.index')->withInput()->with('success', 'Register berhasil, silakan melakukan login');
     }
 }

@@ -10,6 +10,7 @@ class User extends Model
 
     public const ROLE_ADMIN = 'admin';
     public const ROLE_MEMBER  = 'member';
+    public const ROLE_APPLICANT  = 'applicant';
 
     protected $allowedFields = ['name', 'username', 'email', 'password', 'role'];
 

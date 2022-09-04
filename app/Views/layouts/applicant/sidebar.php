@@ -35,28 +35,22 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
                 <li class="sidebar-item <?= exists_in_segment(['dashboards']) ? 'active' : ''; ?>">
-                    <a href="<?= route_to('member.dashboards.index'); ?>" class="sidebar-link">
+                    <a href="<?= route_to('applicant.dashboards.index'); ?>" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                <li class="sidebar-item <?= exists_in_segment(['bookings']) ? 'active' : ''; ?>">
+                    <a href="<?= route_to('applicant.bookings.index'); ?>" class="sidebar-link">
                         <i class="bi bi-file-earmark-medical-fill"></i>
                         <span>Pemesanan Kamar</span>
                     </a>
                 </li>
                 <li class="sidebar-item <?= exists_in_segment(['payments']) ? 'active' : ''; ?>">
-                    <a href="<?= route_to('member.payments.index'); ?>" class="sidebar-link">
+                    <a href="<?= route_to('applicant.payments.index'); ?>" class="sidebar-link">
                         <i class="bi bi-file-earmark-medical-fill"></i>
                         <span>Pembayaran</span>
-                    </a>
-                </li>
-                <li class="sidebar-item <?= exists_in_segment(['complaints']) ? 'active' : ''; ?>">
-                    <a href="<?= route_to('member.complaints.index'); ?>" class="sidebar-link">
-                        <i class="bi bi-chat-dots-fill"></i>
-                        <span>Pesan Komplain</span>
                     </a>
                 </li>
             </ul>

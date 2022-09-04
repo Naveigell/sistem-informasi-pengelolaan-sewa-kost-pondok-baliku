@@ -8,5 +8,5 @@ class Applicant extends Model
 {
     protected $table = 'applicants';
 
-    protected $allowedFields = ['name', 'email', 'job', 'phone', 'address', 'message', 'is_approved'];
+    protected $allowedFields = ['name', 'username', 'email', 'password', 'job', 'identity_card', 'phone', 'address', 'is_approved'];
 }

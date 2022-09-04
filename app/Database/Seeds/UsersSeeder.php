@@ -17,20 +17,6 @@ class UsersSeeder extends Seeder
                 'password' => password_hash("PondokAdminBaliku", PASSWORD_DEFAULT),
                 'role'     => User::ROLE_ADMIN,
             ],
-//            [
-//                'username' => 'member',
-//                'name'     => 'member',
-//                'email'    => 'member@gmail.com',
-//                'password' => password_hash(123456, PASSWORD_DEFAULT),
-//                'role'     => User::ROLE_MEMBER,
-//            ],
-//            [
-//                'username' => 'member123',
-//                'name'     => 'member123',
-//                'email'    => 'member123@gmail.com',
-//                'password' => password_hash(123456, PASSWORD_DEFAULT),
-//                'role'     => User::ROLE_MEMBER,
-//            ],
         ];
 
         (new User())->insertBatch($data);
@@ -47,5 +33,13 @@ class UsersSeeder extends Seeder
                 "role"     => User::ROLE_MEMBER,
             ]);
         }
+
+        (new User())->insert([
+            'username' => 'applicant123',
+            'name'     => 'applicant123',
+            'email'    => 'applicant@gmail.com',
+            'password' => password_hash("123456", PASSWORD_DEFAULT),
+            'role'     => User::ROLE_APPLICANT,
+        ]);
     }
 }

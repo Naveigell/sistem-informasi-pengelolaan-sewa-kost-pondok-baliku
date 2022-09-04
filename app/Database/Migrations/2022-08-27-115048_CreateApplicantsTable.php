@@ -19,14 +19,26 @@ class CreateApplicantsTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'username' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'email' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
                 'unique' => true,
             ],
+            'password' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'job' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
+            ],
+            'identity_card' => [
+                'type' => 'VARCHAR',
+                'constraint' => 200,
             ],
             'phone' => [
                 'type' => 'VARCHAR',
@@ -35,9 +47,6 @@ class CreateApplicantsTable extends Migration
             'address' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
-            ],
-            'message' => [
-                'type' => 'TEXT',
             ],
             'is_approved' => [
                 'type' => 'INTEGER',

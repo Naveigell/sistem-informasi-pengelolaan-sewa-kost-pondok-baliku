@@ -23,9 +23,11 @@ class PaymentController extends BaseController
             return $pivot['facility_id'];
         }, $roomFacilityPivot);
 
-        $facilities = count($facilityPivotIds) > 0 ? (new RoomFacility())->whereIn('id', $facilityPivotIds)->findAll() : [];
+        $facilities         = count($facilityPivotIds) > 0 ? (new RoomFacility())->whereIn('id', $facilityPivotIds)->findAll() : [];
+        $prices             = array_column($facilities, 'facility_price');
+        $facilityTotalPrice = array_sum($prices);
 
-        return view('member/pages/payment/index', compact('payments', 'roomUserPivot', 'room', 'roomType', 'roomFacilityPivot', 'facilityPivotIds', 'facilities'));
+        return view('member/pages/payment/index', compact('payments', 'roomUserPivot', 'room', 'roomType', 'roomFacilityPivot', 'facilityPivotIds', 'facilities', 'facilityTotalPrice'));
     }
 
     public function store()

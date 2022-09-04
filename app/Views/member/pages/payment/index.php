@@ -10,6 +10,7 @@
     <?php /** @var array $room */ ?>
     <?php /** @var array $roomType */ ?>
     <?php /** @var array $facilities */ ?>
+    <?php /** @var array $facilityTotalPrice */ ?>
 
     <section class="row">
         <div class="col-12">
@@ -68,6 +69,18 @@
                                                                         <div class="form-group">
                                                                             <label for="disabledInput">Harga Sewa</label>
                                                                             <input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="<?= format_currency($room['price']); ?>">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="disabledInput">Harga Semua Fasilitas</label>
+                                                                            <input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="<?= format_currency($facilityTotalPrice); ?>">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="disabledInput">Total Yang Harus Dibayar</label>
+                                                                            <input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="<?= format_currency($room['price'] + $facilityTotalPrice); ?>">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 col-12">

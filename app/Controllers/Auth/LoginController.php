@@ -44,10 +44,6 @@ class LoginController extends BaseController
         session()->set('user', $user);
         session()->set('hasLoggedIn', true);
 
-        if ($user->role == User::ROLE_ADMIN) {
-            return redirect()->route('admin.dashboards.index');
-        }
-
-        return redirect()->route('member.dashboards.index');
+        return redirect()->route(session()->get('user')->role . '.dashboards.index');
     }
 }

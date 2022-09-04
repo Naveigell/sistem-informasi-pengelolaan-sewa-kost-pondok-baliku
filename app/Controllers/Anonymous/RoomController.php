@@ -4,29 +4,38 @@ namespace App\Controllers\Anonymous;
 
 use App\Controllers\BaseController;
 use App\Models\Room;
+use App\Models\RoomFacility;
 use App\Models\RoomUserPivot;
 
 class RoomController extends BaseController
 {
     public function roomA()
     {
-        $rooms = $this->emptyRooms();
+        $rooms      = $this->emptyRooms();
+        $facilities = $this->facilities();
 
-        return view('anonymous/roomA', compact('rooms'));
+        return view('anonymous/roomA', compact('rooms', 'facilities'));
     }
 
     public function roomB()
     {
-        $rooms = $this->emptyRooms();
+        $rooms      = $this->emptyRooms();
+        $facilities = $this->facilities();
 
-        return view('anonymous/roomB', compact('rooms'));
+        return view('anonymous/roomB', compact('rooms', 'facilities'));
     }
 
     public function roomC()
     {
-        $rooms = $this->emptyRooms();
+        $rooms      = $this->emptyRooms();
+        $facilities = $this->facilities();
 
-        return view('anonymous/roomC', compact('rooms'));
+        return view('anonymous/roomC', compact('rooms', 'facilities'));
+    }
+
+    private function facilities()
+    {
+        return (new RoomFacility())->findAll();
     }
 
     private function emptyRooms()

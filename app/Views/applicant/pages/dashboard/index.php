@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/member/member') ?>
+<?= $this->extend('layouts/applicant/applicant') ?>
 
 <?= $this->section('content-title') ?>
 Dashboard

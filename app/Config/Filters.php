@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Filters\AdminFilter;
 use App\Filters\AnonymousFilter;
+use App\Filters\ApplicantFilter;
 use App\Filters\FilterUser;
 use App\Filters\MemberFilter;
 use CodeIgniter\Config\BaseConfig;
@@ -31,6 +32,7 @@ class Filters extends BaseConfig
         'adminfilter'     => AdminFilter::class,
         'memberfilter'    => MemberFilter::class,
         'anonymousfilter' => AnonymousFilter::class,
+        'applicantfilter' => ApplicantFilter::class,
     ];
 
     /**

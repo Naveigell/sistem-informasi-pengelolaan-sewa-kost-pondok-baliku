@@ -14,7 +14,8 @@ class RoomFacilitySeeder extends Seeder
 
         foreach ($types as $type) {
             $facility->insert([
-                "facility_name" => $type,
+                "facility_name"  => $type,
+                "facility_price" => (10 ** rand(3, 5)) * rand(1, 5),
             ]);
         }
     }

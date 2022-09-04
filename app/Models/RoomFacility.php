@@ -8,5 +8,5 @@ class RoomFacility extends Model
 {
     protected $table = 'room_facilities';
 
-    protected $allowedFields = ['facility_name'];
+    protected $allowedFields = ['facility_name', 'facility_price'];
 }

@@ -19,9 +19,9 @@
 <body>
     <div id="app">
 
-        <?= $this->include('layouts/member/sidebar'); ?>
+        <?= $this->include('layouts/applicant/sidebar'); ?>
         <div id="main">
-            <?= $this->include('layouts/member/header'); ?>
+            <?= $this->include('layouts/applicant/header'); ?>
 
             <div class="page-content">
                 <?= $this->renderSection('content-body'); ?>
@@ -78,6 +78,10 @@
                 html += '</ul>';
 
                 $(element).html(html);
+            }
+
+            function thousandSeparator(value, separator) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator ? separator : '.');
             }
         </script>
 

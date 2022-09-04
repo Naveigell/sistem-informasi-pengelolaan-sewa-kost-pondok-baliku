@@ -47,12 +47,26 @@ Payment
                             $roomUserPivot = (new RoomUserPivot())->where('user_id', $payment['user_id'])->orderBy('id', 'DESC')->first();
                             $room          = (new Room())->where('id', $roomUserPivot['room_id'])->orderBy('id', 'DESC')->first();
                             $roomType      = (new RoomType())->where('id', $room['room_type_id'])->first();
+
+                            $roomFacilityPivot = (new \App\Models\RoomFacilityPivot())->where('room_id', $room['id'])->where('is_active', 1)->findAll();
+                            $facilityIds       = array_column($roomFacilityPivot, 'facility_id');
+
+                            $facilities        = [];
+                            $total             = 0;
+
+                            if (count($facilityIds) > 0) {
+                                $facilities = (new \App\Models\RoomFacility())->whereIn('id', $facilityIds)->findAll();
+
+                                $total = array_sum(
+                                    array_column($facilities, 'facility_price')
+                                );
+                            }
                         ?>
 
                         <tr>
                             <td><?= $room['room_number']; ?></td>
                             <td class="text-bold-500"><?= date('d F Y', strtotime($payment['payment_date'])); ?></td>
-                            <td><?= format_currency($room['price']); ?></td>
+                            <td><?= format_currency($room['price'] + $total); ?></td>
                             <td>
                                 <a href="<?= base_url('uploads/images/payments') . DIRECTORY_SEPARATOR . $payment['proof']; ?>"
                                    class="image-zoom">
