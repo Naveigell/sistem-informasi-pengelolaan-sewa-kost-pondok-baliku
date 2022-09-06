@@ -61,7 +61,11 @@ class AccountController extends BaseController
         }
 
         (new User())->builder()->where('id', session()->get('user')->id)->update($this->request->getVar(['name']));
-        (new Biodata())->builder()->where('user_id', session()->get('user')->id)->update($this->request->getVar(['job', 'phone', 'address']));
+        (new Biodata())->builder()->where('user_id', session()->get('user')->id)->update(
+            array_merge($this->request->getVar(['job', 'phone', 'address']), [
+                "has_filled_biodata" => 1,
+            ])
+        );
 
         $user = (object) (new User())->where('id', session()->get('user')->id)->first();
 

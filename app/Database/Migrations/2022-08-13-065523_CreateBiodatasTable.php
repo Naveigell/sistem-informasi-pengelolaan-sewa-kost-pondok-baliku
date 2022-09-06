@@ -36,6 +36,11 @@ class CreateBiodatasTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'has_filled_biodata' => [
+                'type' => 'INT',
+                'constraint' => 5,
+                'default' => 0,
+            ]
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');

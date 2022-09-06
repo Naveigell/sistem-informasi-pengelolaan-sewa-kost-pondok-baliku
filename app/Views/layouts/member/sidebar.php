@@ -40,13 +40,6 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-
-                <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Pemesanan Kamar</span>
-                    </a>
-                </li>
                 <li class="sidebar-item <?= exists_in_segment(['payments']) ? 'active' : ''; ?>">
                     <a href="<?= route_to('member.payments.index'); ?>" class="sidebar-link">
                         <i class="bi bi-file-earmark-medical-fill"></i>

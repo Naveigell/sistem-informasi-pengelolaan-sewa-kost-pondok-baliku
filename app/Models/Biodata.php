@@ -8,5 +8,5 @@ class Biodata extends Model
 {
     protected $table = 'biodatas';
 
-    protected $allowedFields = ['user_id', 'job', 'identity_card', 'phone', 'address'];
+    protected $allowedFields = ['user_id', 'job', 'identity_card', 'phone', 'address', 'has_filled_biodata'];
 }

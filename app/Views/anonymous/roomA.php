@@ -101,10 +101,6 @@
                                 <h4 class="mb-4">Tersisa <?= count($rooms); ?> kamar lagi!</h4>
                             <?php endif; ?>
                         </div>
-                        <div class="col-12 room-single mt-4 mb-5 ftco-animate">
-                            <h4 class="mb-4">Form Pemesanan Kamar</h4>
-                            <?= $this->include('anonymous/includes/rent_form'); ?>
-                        </div>
                         <div class="col-md-12 room-single ftco-animate mb-5 mt-5">
                             <h4 class="mb-4">Pilihan Lainnya</h4>
                             <div class="row">

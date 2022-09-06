@@ -1,3 +1,9 @@
+<?php
+
+use App\Models\Room;
+use App\Models\RoomUserPivot;
+
+?>
 <?= $this->extend('layouts/applicant/applicant') ?>
 
 <?= $this->section('content-title') ?>
@@ -27,12 +33,35 @@
                                                     <div class="card-body">
                                                         <p></p>
                                                         <h4 class="card-title">Pilihan kamar</h4>
+                                                        <script>
+                                                            var roomTypeMustBeDisabled = [];
+                                                        </script>
                                                         <?php /** @var array $roomTypes */
                                                         foreach ($roomTypes as $type): ?>
+
+                                                            <?php
+                                                                $rooms = (new Room())->where('room_type_id', $type['id'])->findAll();
+                                                                $ids   = array_column($rooms, 'id');
+
+                                                                $pivot = (new RoomUserPivot())->whereIn('room_id', $ids)->where('user_id IS NULL')->findAll();
+                                                                $emptyRooms = count($pivot);
+                                                            ?>
+
+                                                            <?php if ($emptyRooms <= 0): ?>
+                                                                <script>
+                                                                    roomTypeMustBeDisabled.push(<?= $type['id']; ?>);
+                                                                </script>
+                                                            <?php endif; ?>
+
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="room_type" id="room-type-<?= $type['id']; ?>" value="<?= $type['id']; ?>">
+                                                                <input data-room-type-id="<?= $type['id']; ?>" class="form-check-input" type="radio" name="room_type" id="room-type-<?= $type['id']; ?>" value="<?= $type['id']; ?>">
                                                                 <label class="form-check-label" for="room-type-<?= $type['id']; ?>">
                                                                     Kamar <?= $type['name']; ?>
+                                                                    <?php if ($emptyRooms > 0): ?>
+                                                                        (sisa <?= $emptyRooms; ?> kamar lagi)
+                                                                    <?php else: ?>
+                                                                        (penuh)
+                                                                    <?php endif; ?>
                                                                 </label>
                                                             </div>
                                                         <?php endforeach; ?>
@@ -72,10 +101,10 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="form-floating">
-                                                    <textarea name="message" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="resize: none; height: 200px;"></textarea>
+                                                    <textarea name="message" class="form-control" placeholder="Leave a comment here" id="booking-comment" style="resize: none; height: 200px;"></textarea>
                                                     <label for="floatingTextarea">Comments</label>
                                                 </div>
-                                                <button type="submit" class="btn icon icon-left btn-success d-block mt-3"><i data-feather="check-circle"></i>Pesan</button>
+                                                <button type="submit" class="btn icon icon-left btn-success d-block mt-3" id="booking-button"><i data-feather="check-circle"></i>Pesan</button>
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +182,8 @@
         });
 
         $('input[type=radio]').change(function (e) {
-            var value = e.target.value;
+            var value      = e.target.value;
+            var roomTypeId = $(this).data('room-type-id');
 
             total = 0;
 
@@ -167,6 +197,17 @@
 
                 calculateTotal(facility);
                 renderTotal();
+            }
+
+            if (roomTypeMustBeDisabled.includes(roomTypeId)) {
+                facilities.prop('disabled', true);
+
+                $('#booking-button').addClass('d-none');
+                $('#booking-comment').prop('disabled', true);
+            } else {
+
+                $('#booking-comment').prop('disabled', false);
+                $('#booking-button').removeClass('d-none');
             }
         });
 

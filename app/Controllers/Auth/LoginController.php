@@ -3,6 +3,7 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\BaseController;
+use App\Models\Biodata;
 use App\Models\User;
 
 class LoginController extends BaseController
@@ -43,6 +44,12 @@ class LoginController extends BaseController
 
         session()->set('user', $user);
         session()->set('hasLoggedIn', true);
+
+        $biodata = (new Biodata())->where('user_id', $user->id)->first();
+
+        if (!$biodata['has_filled_biodata']) {
+            return redirect()->route(session()->get('user')->role . '.accounts.index')->with('biodata-errors', ['biodata' => 'Mohon untuk mengisi biodata terlebih dahulu']);
+        }
 
         return redirect()->route(session()->get('user')->role . '.dashboards.index');
     }

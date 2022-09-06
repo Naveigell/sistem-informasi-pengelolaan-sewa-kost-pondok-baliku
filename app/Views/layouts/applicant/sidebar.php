@@ -41,18 +41,30 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item <?= exists_in_segment(['bookings']) ? 'active' : ''; ?>">
-                    <a href="<?= route_to('applicant.bookings.index'); ?>" class="sidebar-link">
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Pemesanan Kamar</span>
-                    </a>
-                </li>
-                <li class="sidebar-item <?= exists_in_segment(['payments']) ? 'active' : ''; ?>">
-                    <a href="<?= route_to('applicant.payments.index'); ?>" class="sidebar-link">
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Pembayaran</span>
-                    </a>
-                </li>
+                <?php
+                    $biodata = (new \App\Models\Biodata())->where('user_id', session()->get('user')->id)->first();
+                ?>
+                <?php if ($biodata['has_filled_biodata']): ?>
+                    <li class="sidebar-item <?= exists_in_segment(['bookings']) ? 'active' : ''; ?>">
+                        <a href="<?= route_to('applicant.bookings.index'); ?>" class="sidebar-link">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                            <span>Pemesanan Kamar</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item <?= exists_in_segment(['payments']) ? 'active' : ''; ?>">
+                        <a href="<?= route_to('applicant.payments.index'); ?>" class="sidebar-link">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                            <span>Pembayaran</span>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li class="sidebar-item <?= exists_in_segment(['accounts']) ? 'active' : ''; ?>">
+                        <a href="<?= route_to('applicant.accounts.index'); ?>" class="sidebar-link">
+                            <i class="bi bi-people"></i>
+                            <span>Akun</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">

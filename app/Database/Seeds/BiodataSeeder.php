@@ -16,11 +16,12 @@ class BiodataSeeder extends Seeder
 
         foreach ($users as $user) {
             $biodata->insert([
-                "user_id"       => $user['id'],
-                "job"           => $jobs[array_rand($jobs)],
-                "identity_card" => '',
-                "phone"         => "08" . rand(1111111111, 9999999999),
-                "address"       => $this->str_random(20),
+                "user_id"            => $user['id'],
+                "job"                => $jobs[array_rand($jobs)],
+                "identity_card"      => '',
+                "phone"              => "08" . rand(1111111111, 9999999999),
+                "address"            => $this->str_random(20),
+                'has_filled_biodata' => 1,
             ]);
         }
     }

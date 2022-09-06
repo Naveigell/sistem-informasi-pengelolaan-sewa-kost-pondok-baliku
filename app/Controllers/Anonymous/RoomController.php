@@ -11,7 +11,7 @@ class RoomController extends BaseController
 {
     public function roomA()
     {
-        $rooms      = $this->emptyRooms();
+        $rooms      = $this->emptyRooms(1);
         $facilities = $this->facilities();
 
         return view('anonymous/roomA', compact('rooms', 'facilities'));
@@ -19,7 +19,7 @@ class RoomController extends BaseController
 
     public function roomB()
     {
-        $rooms      = $this->emptyRooms();
+        $rooms      = $this->emptyRooms(2);
         $facilities = $this->facilities();
 
         return view('anonymous/roomB', compact('rooms', 'facilities'));
@@ -27,7 +27,7 @@ class RoomController extends BaseController
 
     public function roomC()
     {
-        $rooms      = $this->emptyRooms();
+        $rooms      = $this->emptyRooms(3);
         $facilities = $this->facilities();
 
         return view('anonymous/roomC', compact('rooms', 'facilities'));
@@ -38,9 +38,12 @@ class RoomController extends BaseController
         return (new RoomFacility())->findAll();
     }
 
-    private function emptyRooms()
+    private function emptyRooms($typeId)
     {
-        $pivot   = (new RoomUserPivot())->where('user_id IS NULL')->findAll();
+        $rooms = (new Room())->where('room_type_id', $typeId)->findAll();
+        $ids   = array_column($rooms, 'id');
+
+        $pivot   = (new RoomUserPivot())->whereIn('room_id', $ids)->where('user_id IS NULL')->findAll();
 
         $roomIds = array_map(function ($room) {
             return $room['room_id'];
