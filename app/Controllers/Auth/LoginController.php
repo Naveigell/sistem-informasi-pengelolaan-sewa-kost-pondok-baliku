@@ -47,7 +47,7 @@ class LoginController extends BaseController
 
         $biodata = (new Biodata())->where('user_id', $user->id)->first();
 
-        if (!$biodata['has_filled_biodata']) {
+        if ($biodata && !$biodata['has_filled_biodata']) {
             return redirect()->route(session()->get('user')->role . '.accounts.index')->with('biodata-errors', ['biodata' => 'Mohon untuk mengisi biodata terlebih dahulu']);
         }
 

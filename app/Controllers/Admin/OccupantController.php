@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Biodata;
+use App\Models\RoomUserPivot;
 use App\Models\User;
 
 class OccupantController extends BaseController
@@ -78,5 +79,18 @@ class OccupantController extends BaseController
         }
 
 //        render_json(200, $this->request->getFile('identity_card')->getClientName());
+    }
+
+    public function destroy($userId)
+    {
+        $pivot = (new RoomUserPivot())->where('user_id', $userId)->first();
+
+        (new RoomUserPivot())->update($pivot['id'], [
+            "user_id" => null,
+        ]);
+
+        (new User())->delete($pivot['user_id']);
+
+        return redirect('admin.occupants.index')->withInput()->with('success', 'Berhasil menghapus member');
     }
 }

@@ -58,6 +58,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
 
     $routes->get('occupants', 'Admin\OccupantController::index', ["as" => "admin.occupants.index"]);
     $routes->put('occupants/(:num)', 'Admin\OccupantController::update/$1', ["as" => "admin.occupants.update"]);
+    $routes->delete('occupants/(:num)', 'Admin\OccupantController::destroy/$1', ["as" => "admin.occupants.destroy"]);
 
     $routes->get('applicants', 'Admin\ApplicantController::index', ["as" => "admin.applicants.index"]);
     $routes->put('applicants/(:num)/approve', 'Admin\ApplicantController::approve/$1', ["as" => "admin.applicants.approve"]);
@@ -83,6 +84,10 @@ $routes->group('member', ['filter' => 'memberfilter'], function ($routes) {
 
     $routes->get('complaints', 'Member\ComplaintController::index', ["as" => "member.complaints.index"]);
     $routes->post('complaints', 'Member\ComplaintController::store', ["as" => "member.complaints.store"]);
+
+    $routes->get('accounts', 'Member\AccountController::index', ["as" => "member.accounts.index"]);
+    $routes->post('accounts', 'Member\AccountController::update', ["as" => "member.accounts.update"]);
+    $routes->put('accounts/password', 'Member\AccountController::password', ["as" => "member.accounts.password.update"]);
 });
 
 $routes->group('applicant', ['filter' => 'applicantfilter'], function ($routes) {
