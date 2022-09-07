@@ -108,7 +108,7 @@
                                                                     <div class="col-md-6 col-12">
                                                                         <div class="mb-3">
                                                                             <label for="proof" class="form-label">Unggah Bukti Pembayaran</label>
-                                                                            <input class="form-control" type="file" id="proof">
+                                                                            <input accept="image/jpeg,image/png,image/jpg" class="form-control" type="file" id="proof">
                                                                         </div>
                                                                     </div>
                                                                 </div>

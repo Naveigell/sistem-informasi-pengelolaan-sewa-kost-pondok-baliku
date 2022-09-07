@@ -85,11 +85,13 @@ class OccupantController extends BaseController
     {
         $pivot = (new RoomUserPivot())->where('user_id', $userId)->first();
 
-        (new RoomUserPivot())->update($pivot['id'], [
-            "user_id" => null,
-        ]);
+        if ($pivot) {
+            (new RoomUserPivot())->update($pivot['id'], [
+                "user_id" => null,
+            ]);
+        }
 
-        (new User())->delete($pivot['user_id']);
+        (new User())->delete($pivot ? $pivot['user_id'] : $userId);
 
         return redirect('admin.occupants.index')->withInput()->with('success', 'Berhasil menghapus member');
     }

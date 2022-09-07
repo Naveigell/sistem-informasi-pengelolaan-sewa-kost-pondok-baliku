@@ -19,6 +19,10 @@ class CreateRoomTypesTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'rent_price' => [
+                'type' => 'INT',
+                'constraint' => 255,
+            ]
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('room_types');

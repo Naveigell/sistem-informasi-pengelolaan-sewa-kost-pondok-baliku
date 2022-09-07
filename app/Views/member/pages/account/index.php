@@ -49,8 +49,8 @@ Complaint
                         <input class="form-control" id="old_password" name="job" type="text" value="<?= $biodata['job']; ?>" placeholder="Masukkan pekerjaan">
                     </div>
                     <div class="mb-3">
-                        <label class="small mb-1" for="old_password">NIK</label>
-                        <input class="form-control" id="old_password" name="identity_card" type="file">
+                        <label class="small mb-1" for="old_password">Foto KTP</label>
+                        <input class="form-control" accept="image/jpeg,image/png,image/jpg" id="old_password" name="identity_card" type="file">
                     </div>
                     <div class="mb-3">
                         <label class="small mb-1" for="old_password">No Telp</label>

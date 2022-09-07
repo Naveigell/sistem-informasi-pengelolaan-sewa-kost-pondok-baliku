@@ -31,6 +31,17 @@ use App\Models\RoomUserPivot;
                                             <div class="card">
                                                 <div class="card-content">
                                                     <div class="card-body">
+
+                                                        <?php if ($errors = session()->getFlashdata('errors')) : ?>
+                                                            <div class="alert-danger alert text-left">
+                                                                <ul>
+                                                                    <?php foreach ($errors as $error) : ?>
+                                                                        <li><?= $error; ?></li>
+                                                                    <?php endforeach; ?>
+                                                                </ul>
+                                                            </div>
+                                                        <?php endif; ?>
+
                                                         <p></p>
                                                         <h4 class="card-title">Pilihan kamar</h4>
                                                         <script>
@@ -54,7 +65,7 @@ use App\Models\RoomUserPivot;
                                                             <?php endif; ?>
 
                                                             <div class="form-check">
-                                                                <input data-room-type-id="<?= $type['id']; ?>" class="form-check-input" type="radio" name="room_type" id="room-type-<?= $type['id']; ?>" value="<?= $type['id']; ?>">
+                                                                <input data-room-price="<?= $type['rent_price']; ?>" data-room-type-id="<?= $type['id']; ?>" class="form-check-input" type="radio" name="room_type" id="room-type-<?= $type['id']; ?>" value="<?= $type['id']; ?>">
                                                                 <label class="form-check-label" for="room-type-<?= $type['id']; ?>">
                                                                     Kamar <?= $type['name']; ?>
                                                                     <?php if ($emptyRooms > 0): ?>
@@ -66,14 +77,25 @@ use App\Models\RoomUserPivot;
                                                             </div>
                                                         <?php endforeach; ?>
                                                         <p></p>
+                                                        <h4 class="card-title">Pilihan durasi</h4>
+                                                        <div class="form-check p-0">
+                                                            <select name="room_rent_duration_id" id="duration" class="form-control">
+                                                                <option value="">-- Nothing Selected --</option>
+                                                                <?php /** @var array $roomDurations */
+                                                                foreach ($roomDurations as $duration): ?>
+                                                                    <option value="<?= $duration['id']; ?>"><?= $duration['name']; ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                        </div>
+                                                        <p></p>
                                                         <h4 class="card-title">Pilihan fasilitas</h4>
                                                         <ul class="list-group">
                                                             <?php /** @var array $roomFacilities */
                                                             foreach ($roomFacilities as $facility): ?>
                                                                 <li class="list-group-item">
-                                                                    <input disabled data-price="<?= $facility['facility_price']; ?>" class="form-check-input me-1 room-facilities" id="room-facility-<?= $facility['id']; ?>" name="facilities[]" type="checkbox" value="<?= $facility['id']; ?>" aria-label="">
-                                                                    <label for="room-facility-<?= $facility['id']; ?>"><?= $facility['facility_name']; ?></label>
-                                                                    <label style="float: right;" class="d-inline-block badge badge-success"><?= format_currency($facility['facility_price']); ?></label>
+                                                                    <input <?= $facility['is_disabled'] ? 'checked' : ''; ?> disabled data-price="<?= $facility['facility_price']; ?>" class="form-check-input me-1 <?= $facility['is_disabled'] ? 'room-facilities-disabled' : 'room-facilities'; ?>" id="room-facility-<?= $facility['id']; ?>" name="facilities[]" type="checkbox" value="<?= $facility['id']; ?>" aria-label="">
+                                                                    <label for="room-facility-<?= $facility['id']; ?>"><?= $facility['facility_name']; ?> <?= $facility['is_disabled'] ? '(include)' : ''; ?></label>
+                                                                    <label style="float: right;" class="d-inline-block badge badge-success"><?= $facility['facility_price'] <= 0 ? 'Rp. -' : format_currency($facility['facility_price']); ?></label>
                                                                 </li>
                                                             <?php endforeach; ?>
                                                         </ul>
@@ -151,6 +173,7 @@ use App\Models\RoomUserPivot;
     <script>
         var facilities = $('.room-facilities');
         var total      = 0;
+        var basePrice  = 0;
 
         addEventOnChangeToFacilities();
 
@@ -162,7 +185,7 @@ use App\Models\RoomUserPivot;
                 total -= $(facility).data('price');
             }
 
-            total = Math.max(0, total);
+            total = Math.max(200000, total);
         }
 
         function addEventOnChangeToFacilities() {
@@ -179,13 +202,19 @@ use App\Models\RoomUserPivot;
             for (var facility of facilities) {
                 $(facility).prop('disabled', false);
             }
+
+            for (var facility of $('.room-facilities-disabled')) {
+                $(facility).prop('disabled', false);
+            }
         });
 
         $('input[type=radio]').change(function (e) {
             var value      = e.target.value;
             var roomTypeId = $(this).data('room-type-id');
 
-            total = 0;
+            basePrice = $(this).data('room-price');
+
+            total = 200000;
 
             for (var facility of facilities) {
 
@@ -212,8 +241,8 @@ use App\Models\RoomUserPivot;
         });
 
         function renderTotal() {
-            $('#total').val(thousandSeparator(total));
-            $('#total-hidden').val(total);
+            $('#total').val(thousandSeparator(basePrice + total));
+            $('#total-hidden').val(basePrice + total);
         }
     </script>
 <?= $this->endSection() ?>

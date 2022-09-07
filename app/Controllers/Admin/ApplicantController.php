@@ -46,7 +46,12 @@ class ApplicantController extends BaseController
             if ($roomUserPivot) {
                 (new RoomFacilityPivot())->builder()->where('room_id', $roomUserPivot['room_id'])->delete();
                 (new RoomUserPivot())->builder()->where('room_id', $roomUserPivot['room_id'])->update([
-                    "user_id" => $booking['user_id'],
+                    "user_id"               => $booking['user_id'],
+                ]);
+
+                (new Room())->builder()->where('id', $roomUserPivot['room_id'])->update([
+                    "price"                 => $booking['total'],
+                    "room_rent_duration_id" => $booking['room_rent_duration_id'],
                 ]);
 
                 // request facilities

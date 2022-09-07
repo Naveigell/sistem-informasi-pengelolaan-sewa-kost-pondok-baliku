@@ -14,30 +14,13 @@ Dashboard
                     <div class="card-body px-3 py-4-5">
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="stats-icon purple">
-                                    <i class="iconly-boldShow"></i>
+                                <div class="stats-icon red">
+                                    <i class="iconly-boldDanger"></i>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h6 class="text-muted font-semibold">Pembayaran bulan ini</h6>
-                                <h6 class="font-extrabold mb-0">Lunas</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body px-3 py-4-5">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="stats-icon blue">
-                                    <i class="iconly-boldProfile"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <h6 class="text-muted font-semibold">Komplain</h6>
-                                <h6 class="font-extrabold mb-0">0</h6>
+                                <h6 class="text-muted font-semibold">Jumlah Kamar Tersedia</h6>
+                                <h6 class="font-extrabold mb-0"><?= $emptyRoomCount; ?></h6>
                             </div>
                         </div>
                     </div>

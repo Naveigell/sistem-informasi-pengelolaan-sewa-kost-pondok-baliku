@@ -23,6 +23,11 @@ class CreateRoomFacilitiesTable extends Migration
                 'type' => 'INT',
                 'constraint' => 255,
             ],
+            'is_disabled' => [
+                'type' => 'INT',
+                'constraint' => 20,
+                'default' => 0,
+            ]
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('room_facilities');

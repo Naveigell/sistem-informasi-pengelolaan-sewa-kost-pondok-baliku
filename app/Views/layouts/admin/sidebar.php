@@ -80,7 +80,7 @@
                 <li class="sidebar-item <?= exists_in_segment(['applicants']) ? 'active' : ''; ?>">
                     <a href="<?= route_to('admin.applicants.index'); ?>" class="sidebar-link">
                         <i class="bi bi-signpost-fill"></i>
-                        <span>Pelamar</span>
+                        <span>Calon Penghuni</span>
                     </a>
                 </li>
             </ul>

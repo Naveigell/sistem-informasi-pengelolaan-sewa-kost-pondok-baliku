@@ -16537,6 +16537,9 @@ body .bi:before {
 .stats-icon.red {
     background-color: #ff7976;
 }
+.stats-icon.yellow {
+    background-color: #f3ec25;
+}
 .stats-icon.green {
     background-color: #5ddab4;
 }

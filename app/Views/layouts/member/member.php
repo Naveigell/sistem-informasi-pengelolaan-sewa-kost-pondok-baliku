@@ -60,6 +60,14 @@
                 digits: 0,
                 removeMaskOnSubmit: true,
             });
+
+            $("a.image-zoom").fancybox({
+                'transitionIn': 'elastic',
+                'transitionOut': 'elastic',
+                'speedIn': 600,
+                'speedOut': 200,
+                'overlayShow': false
+            });
         </script>
 
         <script>

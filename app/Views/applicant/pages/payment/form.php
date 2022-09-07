@@ -60,7 +60,7 @@
                                         </div>
                                         <div class="form-group col-12">
                                             <label for="inputPassword4">Input Bukti Pembayaran</label>
-                                            <input type="file" class="form-control" value="" placeholder="Total Pembayaran" name="proof">
+                                            <input type="file" class="form-control" value="" placeholder="Total Pembayaran" name="proof" accept="image/jpeg,image/png,image/jpg">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Bayar</button>

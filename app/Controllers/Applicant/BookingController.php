@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ApplicantFacility;
 use App\Models\ApplicantRequestRoom;
 use App\Models\RoomFacility;
+use App\Models\RoomRentDuration;
 use App\Models\RoomType;
 
 class BookingController extends BaseController
@@ -14,8 +15,9 @@ class BookingController extends BaseController
     {
         $roomTypes      = (new RoomType())->findAll();
         $roomFacilities = (new RoomFacility())->findAll();
+        $roomDurations  = (new RoomRentDuration())->findAll();
 
-        return view('applicant/pages/booking/index', compact('roomTypes', 'roomFacilities'));
+        return view('applicant/pages/booking/index', compact('roomTypes', 'roomFacilities', 'roomDurations'));
     }
 
     public function store()
@@ -23,6 +25,9 @@ class BookingController extends BaseController
         $validator = \Config\Services::validation();
         $validator->setRules([
             "room_type" => [
+                'rules' => 'required',
+            ],
+            "room_rent_duration_id" => [
                 'rules' => 'required',
             ],
         ]);

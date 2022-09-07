@@ -18,7 +18,7 @@ use App\Models\RoomFacility;
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Pelamar Kos</h4>
+                    <h4 class="card-title">Calon Penghuni Kos</h4>
                 </div>
                 <div class="card-content">
                     <!-- table hover -->

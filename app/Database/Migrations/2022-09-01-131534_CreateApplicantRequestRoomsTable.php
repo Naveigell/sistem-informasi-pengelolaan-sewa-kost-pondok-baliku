@@ -25,6 +25,11 @@ class CreateApplicantRequestRoomsTable extends Migration
                 'constraint' => 20,
                 'unsigned' => true,
             ],
+            'room_rent_duration_id' => [
+                'type' => 'BIGINT',
+                'constraint' => 20,
+                'unsigned' => true,
+            ],
             'total' => [
                 'type' => 'BIGINT',
                 'constraint' => 20,
@@ -39,6 +44,7 @@ class CreateApplicantRequestRoomsTable extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('room_type_id', 'room_types', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('room_rent_duration_id', 'room_rent_durations', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('applicant_request_rooms');
     }
 
