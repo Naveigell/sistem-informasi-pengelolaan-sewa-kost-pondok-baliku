@@ -83,7 +83,7 @@ use App\Models\RoomUserPivot;
                                                                 <option value="">-- Nothing Selected --</option>
                                                                 <?php /** @var array $roomDurations */
                                                                 foreach ($roomDurations as $duration): ?>
-                                                                    <option value="<?= $duration['id']; ?>"><?= $duration['name']; ?></option>
+                                                                    <option data-discount="<?= $duration['discount_in_percent']; ?>" value="<?= $duration['id']; ?>"><?= $duration['name']; ?> -- (Diskon <?= $duration['discount_in_percent']; ?> %)</option>
                                                                 <?php endforeach; ?>
                                                             </select>
                                                         </div>
@@ -171,9 +171,10 @@ use App\Models\RoomUserPivot;
 
 <?= $this->section('content-script') ?>
     <script>
-        var facilities = $('.room-facilities');
-        var total      = 0;
-        var basePrice  = 0;
+        var facilities      = $('.room-facilities');
+        var total           = 0;
+        var basePrice       = 0;
+        var discountPercent = 0;
 
         addEventOnChangeToFacilities();
 
@@ -206,6 +207,12 @@ use App\Models\RoomUserPivot;
             for (var facility of $('.room-facilities-disabled')) {
                 $(facility).prop('disabled', false);
             }
+        });
+
+        $('#duration').change(function (e) {
+            discountPercent = $(this).find(":selected").data('discount');
+
+            renderTotal();
         });
 
         $('input[type=radio]').change(function (e) {
@@ -241,8 +248,11 @@ use App\Models\RoomUserPivot;
         });
 
         function renderTotal() {
-            $('#total').val(thousandSeparator(basePrice + total));
-            $('#total-hidden').val(basePrice + total);
+
+            var discountTotal = (discountPercent / 100) * (basePrice + total);
+
+            $('#total').val(thousandSeparator((basePrice + total) - discountTotal));
+            $('#total-hidden').val((basePrice + total) - discountTotal);
         }
     </script>
 <?= $this->endSection() ?>

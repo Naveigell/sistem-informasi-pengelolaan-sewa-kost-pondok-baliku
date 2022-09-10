@@ -20,6 +20,12 @@ Complaint
                             <?php endforeach; ?>
                         </ul>
                     </div>
+                <?php elseif ($success = session()->getFlashdata('success')): ?>
+                    <div class="alert-success alert text-left">
+                        <ul>
+                            <li><?= $success; ?></li>
+                        </ul>
+                    </div>
                 <?php endif; ?>
                 <form action="<?= route_to('admin.accounts.password.update'); ?>" method="post">
                     <?= csrf_field(); ?>

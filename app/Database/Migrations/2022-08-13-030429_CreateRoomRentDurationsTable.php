@@ -19,6 +19,10 @@ class CreateRoomRentDurationsTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'discount_in_percent' => [
+                'type' => 'INT',
+                'constraint' => 4,
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('room_rent_durations');

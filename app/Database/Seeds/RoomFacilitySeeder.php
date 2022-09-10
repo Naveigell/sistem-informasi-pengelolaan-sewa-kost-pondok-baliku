@@ -10,10 +10,6 @@ class RoomFacilitySeeder extends Seeder
     public function run()
     {
         $facility = new RoomFacility();
-        $types    = [
-            'Dapur & Kamar Mandi Dalam', 'Water Heater', 'Lemari', 'Kasur', 'TV', 'AC'
-        ];
-
         $types = [
             [
                 "name"        => "Dapur & Kamar Mandi Dalam",

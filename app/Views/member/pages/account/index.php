@@ -85,7 +85,7 @@ Complaint
                         </ul>
                     </div>
                 <?php endif; ?>
-                <form action="<?= route_to('applicant.accounts.password.update'); ?>" method="post">
+                <form action="<?= route_to('member.accounts.password.update'); ?>" method="post">
                     <?= csrf_field(); ?>
                     <input type="hidden" value="PUT" name="_method">
                     <div class="mb-3">

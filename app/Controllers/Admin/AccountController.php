@@ -47,6 +47,6 @@ class AccountController extends BaseController
             "password" => password_hash($this->request->getVar('new_password'), PASSWORD_DEFAULT),
         ]);
 
-        return redirect()->route('admin.accounts.index');
+        return redirect()->route('admin.accounts.index')->with('success', 'Berhasil mengubah password');
     }
 }
