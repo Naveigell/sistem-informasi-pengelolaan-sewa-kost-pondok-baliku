@@ -116,7 +116,7 @@
         </div>
     </section>
 
-    <section class="ftco-section bg-light">
+    <section class="ftco-section bg-light" style="padding-bottom: 30px;">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-3">
                 <div class="col-md-7 heading-section text-center ftco-animate">
@@ -126,7 +126,7 @@
             <div class="row">
                 <div class="col-sm col-md-6 col-lg-4 ftco-animate">
                     <div class="room">
-                        <a href="<?= route_to('anonymous.rooms-a.index'); ?>" class="img d-flex justify-content-center align-items-center" style="background-image: url(<?= base_url('anonymous/images/room-1.jpg') ?>);">
+                        <a href="<?= route_to('anonymous.rooms-a.index'); ?>" class="img d-flex justify-content-center align-items-center" style="background-image: url(<?= base_url('anonymous/images/a-1.jpg') ?>);">
                             <div class="icon d-flex justify-content-center align-items-center">
                                 <span class="icon-search2"></span>
                             </div>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="col-sm col-md-6 col-lg-4 ftco-animate">
                     <div class="room">
-                        <a href="<?= route_to('anonymous.rooms-b.index'); ?>" class="img d-flex justify-content-center align-items-center" style="background-image: url(<?= base_url('anonymous/images/room-2.jpg') ?>);">
+                        <a href="<?= route_to('anonymous.rooms-b.index'); ?>" class="img d-flex justify-content-center align-items-center" style="background-image: url(<?= base_url('anonymous/images/b-1.jpg') ?>);">
                             <div class="icon d-flex justify-content-center align-items-center">
                                 <span class="icon-search2"></span>
                             </div>
@@ -156,7 +156,7 @@
                 </div>
                 <div class="col-sm col-md-6 col-lg-4 ftco-animate">
                     <div class="room">
-                        <a href="<?= route_to('anonymous.rooms-c.index'); ?>" class="img d-flex justify-content-center align-items-center" style="background-image: url(<?= base_url('anonymous/images/room-3.jpg') ?>);">
+                        <a href="<?= route_to('anonymous.rooms-c.index'); ?>" class="img d-flex justify-content-center align-items-center" style="background-image: url(<?= base_url('anonymous/images/c-1.jpg') ?>);">
                             <div class="icon d-flex justify-content-center align-items-center">
                                 <span class="icon-search2"></span>
                             </div>
@@ -173,10 +173,10 @@
         </div>
     </section>
 
-    <section class="ftco-section contact-section bg-light">
+    <section class="ftco-section contact-section bg-light" style="padding-top: 0;">
         <div class="container">
             <div class="row d-flex mb-5 contact-info">
-                <div class="col-md-12 mb-4">
+                <div class="col-md-12 mb-4 heading-section">
                     <h2 style="text-align: center;" class="mb-4">Kontak Kami</h2>
                 </div>
                 <div class="w-100"></div>
@@ -202,29 +202,9 @@
                 </div>
             </div>
             <div class="row block-9">
-                <div class="col-md-6 order-md-last d-flex">
-                    <form action="#" class="bg-white p-5 contact-form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Email">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Subject">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-                        </div>
-                    </form>
 
-                </div>
-
-                <div class="col-md-6 d-flex">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15776.914382260766!2d115.1979988!3d-8.6697977!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4807c2930d4400e3!2sPondok%20Baliku!5e0!3m2!1sid!2sid!4v1659866677854!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="col-md d-flex">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15776.914382260766!2d115.1979988!3d-8.6697977!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4807c2930d4400e3!2sPondok%20Baliku!5e0!3m2!1sid!2sid!4v1659866677854!5m2!1sid!2sid" width="1200" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -249,7 +229,7 @@
                         <h2 class="ftco-heading-2">Lainnya</h2>
                         <ul class="list-unstyled">
                             <li><a href="#" class="py-2 d-block">Tentang Kami</a></li>
-                            <li><a href="#" class="py-2 d-block">Tata Tertib Penghuni</a></li>
+                            <li><a href="<?= route_to('anonymous.code-of-conduct.index'); ?>" class="py-2 d-block">Tata Tertib Penghuni</a></li>
                         </ul>
                     </div>
                 </div>

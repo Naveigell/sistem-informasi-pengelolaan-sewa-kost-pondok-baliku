@@ -83,7 +83,7 @@ use App\Models\RoomUserPivot;
                                                                 <option value="">-- Nothing Selected --</option>
                                                                 <?php /** @var array $roomDurations */
                                                                 foreach ($roomDurations as $duration): ?>
-                                                                    <option data-discount="<?= $duration['discount_in_percent']; ?>" value="<?= $duration['id']; ?>"><?= $duration['name']; ?> -- (Diskon <?= $duration['discount_in_percent']; ?> %)</option>
+                                                                    <option data-month-total="<?= $duration['month_total']; ?>" data-discount="<?= $duration['discount_in_percent']; ?>" value="<?= $duration['id']; ?>"><?= $duration['name']; ?> -- (Diskon <?= $duration['discount_in_percent']; ?> %)</option>
                                                                 <?php endforeach; ?>
                                                             </select>
                                                         </div>
@@ -104,6 +104,18 @@ use App\Models\RoomUserPivot;
                                             </div>
                                         </div>
                                         <div class="card-body">
+                                            <div class="row">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Harga Per Bulan</h4>
+                                                </div>
+                                                <div class="col-lg-4 mb-1">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text">Rp</span>
+                                                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Addon on both side" readonly id="price-per-month">
+                                                        <input type="hidden" name="total" value="" id="price-per-month-hidden">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="card-header">
                                                     <h4 class="card-title">Total harga</h4>
@@ -171,10 +183,11 @@ use App\Models\RoomUserPivot;
 
 <?= $this->section('content-script') ?>
     <script>
-        var facilities      = $('.room-facilities');
-        var total           = 0;
-        var basePrice       = 0;
-        var discountPercent = 0;
+        var facilities        = $('.room-facilities');
+        var total             = 0;
+        var basePrice         = 0;
+        var discountPercent   = 0;
+        var monthRentDuration = 0;
 
         addEventOnChangeToFacilities();
 
@@ -210,7 +223,8 @@ use App\Models\RoomUserPivot;
         });
 
         $('#duration').change(function (e) {
-            discountPercent = $(this).find(":selected").data('discount');
+            discountPercent   = $(this).find(":selected").data('discount');
+            monthRentDuration = $(this).find(":selected").data('month-total');
 
             renderTotal();
         });
@@ -225,8 +239,10 @@ use App\Models\RoomUserPivot;
 
             for (var facility of facilities) {
 
-                if (value == 1 || value == 3) {
+                if (value == 1) {
                     $(facility).prop('checked', true);
+                } else if (value == 3) {
+                    $(facility).prop('checked', false);
                 }
 
                 $(facility).prop('disabled', value == 1 || value == 3);
@@ -251,8 +267,12 @@ use App\Models\RoomUserPivot;
 
             var discountTotal = (discountPercent / 100) * (basePrice + total);
 
-            $('#total').val(thousandSeparator((basePrice + total) - discountTotal));
-            $('#total-hidden').val((basePrice + total) - discountTotal);
+            var fullTotal = (basePrice + total) - discountTotal;
+
+            $('#total').val(thousandSeparator(fullTotal * monthRentDuration));
+            $('#total-hidden').val(fullTotal * monthRentDuration);
+
+            $('#price-per-month').val(thousandSeparator(fullTotal));
         }
     </script>
 <?= $this->endSection() ?>

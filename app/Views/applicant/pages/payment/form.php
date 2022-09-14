@@ -58,6 +58,16 @@
                                                 <?php endforeach; ?>
                                             </ul>
                                         </div>
+                                        <div class="form-group col-6">
+                                            <label for="">Informasi Pembayaran : </label>
+                                            <div>
+                                                <span class="d-block mb-2">pembayaran dapat dilakukan melalui transfer ke rekening:</span>
+                                                <ul class="">
+                                                    <li>BCA a/n Fransiscus Nathanael 43502822163 dan </li>
+                                                    <li>Mandiri a/n Liana Putri Margaret 1450010953330 </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                         <div class="form-group col-12">
                                             <label for="inputPassword4">Input Bukti Pembayaran</label>
                                             <input type="file" class="form-control" value="" placeholder="Total Pembayaran" name="proof" accept="image/jpeg,image/png,image/jpg">

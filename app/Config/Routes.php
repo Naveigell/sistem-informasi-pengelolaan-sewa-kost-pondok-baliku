@@ -48,6 +48,7 @@ $routes->group('', ['filter' => 'anonymousfilter'], function ($routes) {
     $routes->get('/roomC', 'Anonymous\RoomController::roomC', ["as" => "anonymous.rooms-c.index"]);
     $routes->get('/contacts', 'Anonymous\ContactController::index', ["as" => "anonymous.contacts.index"]);
     $routes->post('/rent', 'Anonymous\ApplicantController::store', ["as" => "anonymous.applicants.store"]);
+    $routes->get('/code-of-conduct', 'Anonymous\CodeOfConductController::index', ["as" => "anonymous.code-of-conduct.index"]);
 });
 
 $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {

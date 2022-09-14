@@ -111,7 +111,7 @@ Dashboard
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
-                                                                                <label for="basicInput">Password</label>
+                                                                                <label for="basicInput">Reset Password</label>
                                                                                 <input type="password" class="form-control" id="occupant-password-<?= $occupant['id']; ?>" placeholder="Secret ..">
                                                                             </div>
                                                                         </div>

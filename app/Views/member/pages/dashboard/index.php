@@ -19,7 +19,7 @@ Dashboard
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h6 class="text-muted font-semibold">Jumlah Komplain Aktif</h6>
+                                <h6 class="text-muted font-semibold">Komplain Aktif</h6>
                                 <h6 class="font-extrabold mb-0"><?= $compaintCount; ?></h6>
                             </div>
                         </div>
@@ -37,11 +37,11 @@ Dashboard
                             </div>
                             <div class="col-md-8">
                                 <h6 class="text-muted font-semibold">Pembayaran Bulan Ini</h6>
-                                <?php if (!$payment && date('j') < 10): ?>
+                                <?php if (!$payment && date('j') < 10) : ?>
                                     <h6 class="mb-0 text text-warning">Silakan melakukan pembayaran sebelum tanggal 10</h6>
-                                <?php elseif (!$payment): ?>
+                                <?php elseif (!$payment) : ?>
                                     <h6 class="mb-0 text text-danger">Belum lunas</h6>
-                                <?php else: ?>
+                                <?php else : ?>
                                     <h6 class="mb-0 text text-success">Lunas</h6>
                                 <?php endif; ?>
                             </div>

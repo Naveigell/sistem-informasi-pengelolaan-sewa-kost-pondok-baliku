@@ -24,6 +24,7 @@
                                 <th>Foto KTP</th>
                                 <th>Bukti Pembayaran</th>
                                 <th>Total Bayar</th>
+                                <th>Pesan</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
@@ -70,6 +71,7 @@
                                         </a>
                                     </td>
                                     <td style="white-space: initial;"><?= format_currency($booking['total']); ?></td>
+                                    <td style="white-space: initial;"><?= $booking['message'] ?: '-'; ?></td>
                                     <td>
                                         <?php if ($payment && $payment['status'] == \App\Models\ApplicantRequestRoomPayment::STATUS_UNVERIFIED): ?>
                                             <button type="button" class="btn-confirmation btn btn-sm btn-outline-primary block" data-booking-id="<?= $booking['id']; ?>">

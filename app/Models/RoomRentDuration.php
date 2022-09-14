@@ -8,5 +8,5 @@ class RoomRentDuration extends Model
 {
     protected $table = 'room_rent_durations';
 
-    protected $allowedFields = ['name', 'discount_in_percent'];
+    protected $allowedFields = ['name', 'discount_in_percent', 'month_total'];
 }

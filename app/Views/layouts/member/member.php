@@ -13,14 +13,21 @@
 
     <link rel="stylesheet" href="<?= base_url('assets/css/shared/iconly.css'); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <style>
+        footer{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
 </head>
 
-<body>
+<body style="position: relative; min-height: 100vh">
     <div id="app">
 
         <?= $this->include('layouts/member/sidebar'); ?>
-        <div id="main">
+        <div id="main" style="margin-bottom: 100px">
             <?= $this->include('layouts/member/header'); ?>
 
             <div class="page-content">

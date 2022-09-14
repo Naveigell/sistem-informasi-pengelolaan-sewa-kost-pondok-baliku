@@ -23,6 +23,10 @@ class CreateRoomRentDurationsTable extends Migration
                 'type' => 'INT',
                 'constraint' => 4,
             ],
+            'month_total' => [
+                'type' => 'INT',
+                'constraint' => 5,
+            ]
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('room_rent_durations');

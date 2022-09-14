@@ -1,0 +1,10 @@
+DATE : 14 - 09 - 2022
+1. reset password harus bisa dilakukan secara mandiri oleh user, admin tidak boleh ubah password user ✔
+2. pesan calon penghuni gaada di dashboard admin ✔
+3. ubah gambar di login dan register menjadi \public\anonymous\images\front.jpg ✔
+4. pada landing page, tulisan "kontak kami" disamakan formatnya seperti "pilihan kamar" ✔
+5. "Copyright ©2022 All rights reserved" pada setiap dashboard dipindah di paling bawah (footer) ✔
+6. halaman tambahan tatatertib.php link ke landing page bagian footer ✔
+7. kamar tipe C hanya dapat fasilitas dapur dan kamar mandi dalam saja, sisanya di disabled uncheck ✔
+8. pada total harga ditambahkan "harga perbulan" lalu total harga mengikuti durasi sewa (misal 6 bulan berarti 2jt x 6bln - disc 3%) ✔
+9. tambahkan informasi pembayaran ke rekening: BCA a/n Fransiscus Nathanael 43502822163 dan Mandiri a/n Liana Putri Margaret 1450010953330 ✔

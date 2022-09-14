@@ -160,7 +160,7 @@
                         <h2 class="ftco-heading-2">Lainnya</h2>
                         <ul class="list-unstyled">
                             <li><a href="#" class="py-2 d-block">Tentang Kami</a></li>
-                            <li><a href="#" class="py-2 d-block">Tata Tertib Penghuni</a></li>
+                            <li><a href="<?= route_to('anonymous.code-of-conduct.index'); ?>" class="py-2 d-block">Tata Tertib Penghuni</a></li>
                         </ul>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Kamar A | Pondok Baliku</title>
+    <title>Kamar C | Pondok Baliku</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -35,7 +35,7 @@
         <div class="container">
             <a class="navbar-brand" href="<?= route_to('anonymous.index'); ?>">Pondok Baliku</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="nav-item"><a href="<?= route_to('login.index'); ?>" class="nav-link">Login</a></span>
+                <span class="oi oi-menu"></span> Menu
             </button>
 
             <div class="collapse navbar-collapse" id="ftco-nav">
@@ -53,7 +53,7 @@
             <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
                 <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
                     <div class="text">
-                        <h1 class="mb-4 bread">Pilihan Kamar</h1>
+                        <h1 class="mb-4 bread">Tata Tertib Penghuni Kos</h1>
                     </div>
                 </div>
             </div>
@@ -67,80 +67,52 @@
                 <div class="col-lg-8">
                     <div class="row">
                         <div class="col-md-12 ftco-animate">
-                            <h2 class="mb-4">Tipe A</h2>
-                            <div class="single-slider owl-carousel">
-                                <div class="item">
-                                    <div class="room-img" style="background-image: url(<?= base_url('anonymous/images/a-1.jpg') ?>);"></div>
-                                </div>
-                                <div class="item">
-                                    <div class="room-img" style="background-image: url(<?= base_url('anonymous/images/a-2.jpg') ?>);"></div>
-                                </div>
-                                <div class="item">
-                                    <div class="room-img" style="background-image: url(<?= base_url('anonymous/images/a-3.jpg') ?>); background-size: auto 100%;"></div>
-                                </div>
-                                <div class="item">
-                                    <div class="room-img" style="background-image: url(<?= base_url('anonymous/images/a-4.jpg') ?>);"></div>
-                                </div>
-                                <div class="item">
-                                    <div class="room-img" style="background-image: url(<?= base_url('anonymous/images/a-5.jpg') ?>);"></div>
-                                </div>
-                            </div>
+                            <h2 class="mb-4">Tata Tertib Yang Harus di Patuhi Oleh Seluruh Penghuni Kos Pondok Baliku</h2>
+                            <p>
+                            <ol>
+                                <li>
+                                    Setiap penghuni kost wajib menyerahkan fotokopi KTP atau identitas diri yang sah.
+                                </li>
+                                <li>
+                                    Penghuni kos bertanggung jawab terhadap kerapihan atau kebersihan kamar dan lingkungan tempat kos serta keamanan ketertiban dan kenyamanan.
+                                </li>
+                                <li>
+                                    Buanglah sampah pada tempat yang disediakan tak kecuali bekas Softex.
+                                </li>
+                                <li>
+                                    Kehilangan barang-barang atau sesuatu yang bersangkutan dengan penghuni kos bukan tanggung jawab pemilik kos.
+                                </li>
+                                <li>
+                                    Dilarang meminjamkan kunci kos pada siapapun terkecuali memberikan kepada pemilik kos terlebih dahulu.
+                                </li>
+                                <li>
+                                    Mematikan air, lampu, dan listrik saat meninggalkan kos.
+                                </li>
+                                <li>
+                                    Saling menghargai, menghormati, serta kerja sama dalam menjaga kenyamanan sesama penghuni kost yang lain.
+                                </li>
+                                <li>
+                                    Dilarang membawa tamu lawan jenis ke kamar atau mengajak tamu menginap baik pagi siang maupun malam hari (bagi pasangan tidak menikah).
+                                </li>
+                                <li>
+                                    Jumlah penghuni kos sesuai perjanjian atau kesepakatan bersama.
+                                </li>
+                                <li>
+                                    Dilarang keras menggunakan narkotika dan minuman keras dan lain-lain.
+                                </li>
+                            </ol>
+                            </p>
                         </div>
-                        <div class="col-md-12 room-single mt-4 ftco-animate">
-                            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
 
-                            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline6 of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-                        </div>
-                        <div class="col-12 room-single mb-5 ftco-animate">
-                            <?php
-                            /**
-                             * @var array $rooms
-                             */
-                            ?>
-                            <?php if (count($rooms) > 0) : ?>
-                                <h4 class="mb-4">Tersisa <?= count($rooms); ?> kamar lagi!</h4>
-                            <?php endif; ?>
-                        </div>
-                        <div class="col-md-12 room-single ftco-animate mb-5 mt-5">
-                            <h4 class="mb-4">Pilihan Lainnya</h4>
-                            <div class="row">
-                                <div class="col-sm col-md-6 ftco-animate">
-                                    <div class="room">
-                                        <a href="<?= route_to('anonymous.rooms-b.index'); ?>" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(<?= base_url('anonymous/images/room-1.jpg') ?>);">
-                                            <div class="icon d-flex justify-content-center align-items-center">
-                                                <span class="icon-search2"></span>
-                                            </div>
-                                        </a>
-                                        <div class="text p-3 text-center">
-                                            <h3 class="mb-3"><a href="<?= route_to('anonymous.rooms-b.index'); ?>">Tipe B</a></h3>
-                                            <p><span class="price mr-2">Rp. 1.200K</span> <span class="per">/ Bulan</span></p>
-                                            <hr>
-                                            <p class="pt-1"><a href="<?= route_to('anonymous.rooms-b.index'); ?>" class="btn-custom">Lihat Lebih Detail&nbsp; <span class="icon-long-arrow-right"></span></a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm col-md-6 ftco-animate">
-                                    <div class="room">
-                                        <a href="<?= route_to('anonymous.rooms-c.index'); ?>" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(<?= base_url('anonymous/images/room-2.jpg') ?>);">
-                                            <div class="icon d-flex justify-content-center align-items-center">
-                                                <span class="icon-search2"></span>
-                                            </div>
-                                        </a>
-                                        <div class="text p-3 text-center">
-                                            <h3 class="mb-3"><a href="<?= route_to('anonymous.rooms-c.index'); ?>">Tipe C</a></h3>
-                                            <p><span class="price mr-2">Rp. 1.000K</span> <span class="per">/ Bulan&nbsp;</span></p>
-                                            <hr>
-                                            <p class="pt-1"><a href="<?= route_to('anonymous.rooms-c.index'); ?>" class="btn-custom">Lihat Lebih Detail <span class="icon-long-arrow-right"></span></a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div> <!-- .col-md-8 -->
 
+            </div>
+        </div>
     </section> <!-- .section -->
+
+
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
         <div class="container">

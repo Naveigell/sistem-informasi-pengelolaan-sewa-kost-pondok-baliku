@@ -6,8 +6,11 @@ body {
     overflow-x: hidden;
 }
 #auth #auth-right {
-    background: url(../../../assets/images/4853433.png?45649b87e0b3f50bfa1372c6cdb4595f), linear-gradient(90deg, #2d499d, #3f5491);
-    height: 100%}
+    background: url(../../../anonymous/images/front.jpg), linear-gradient(90deg, #2d499d, #3f5491);
+    background-size: 100% 100%;
+    height: 100%;
+    width: 100%;
+}
 #auth #auth-left {
     padding: 5rem 8rem;
 }
