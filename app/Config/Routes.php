@@ -41,6 +41,11 @@ $routes->get('/register', 'Auth\RegisterController::index', ["as" => "register.i
 $routes->post('/register', 'Auth\RegisterController::store', ["as" => "register.store"]);
 $routes->get('/logout', 'Auth\LogoutController::index', ["as" => "logout"]);
 
+$routes->get('/forget-password', 'Auth\AuthController::forgetPasswordIndex', ["as" => "auth.password.email.index"]);
+$routes->post('/forget-password', 'Auth\AuthController::forgetPasswordStore', ["as" => "auth.password.email.store"]);
+$routes->get('/password', 'Auth\AuthController::passwordIndex', ["as" => "auth.password.index"]);
+$routes->post('/password', 'Auth\AuthController::passwordStore', ["as" => "auth.password.store"]);
+
 $routes->group('', ['filter' => 'anonymousfilter'], function ($routes) {
     $routes->get('/', 'Anonymous\LandingPageController::index', ["as" => "anonymous.index"]);
     $routes->get('/roomA', 'Anonymous\RoomController::roomA', ["as" => "anonymous.rooms-a.index"]);

@@ -38,6 +38,7 @@
             </form>
             <div class="text-center mt-5 text-lg fs-4">
                 <p class="text-gray-600">Don't have an account? <a href="<?= base_url('/register'); ?>" class="font-bold">Sign up</a>.</p>
+                <p class="text-gray-600"><a href="<?= route_to('auth.password.email.index'); ?>" class="font-bold">Lupa Password</a>.</p>
             </div>
         </div>
     </div>
