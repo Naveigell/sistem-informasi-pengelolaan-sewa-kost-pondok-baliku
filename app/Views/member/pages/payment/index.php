@@ -111,6 +111,16 @@
                                                                             <input accept="image/jpeg,image/png,image/jpg" class="form-control" type="file" id="proof">
                                                                         </div>
                                                                     </div>
+                                                                    <div class="col-12">
+                                                                        <label for="">Informasi Pembayaran : </label>
+                                                                        <div>
+                                                                            <span class="d-block mb-2">pembayaran dapat dilakukan melalui transfer ke rekening:</span>
+                                                                            <ul class="">
+                                                                                <li>BCA a/n Fransiscus Nathanael 43502822163 dan </li>
+                                                                                <li>Mandiri a/n Liana Putri Margaret 1450010953330 </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </form>
                                                         </div>

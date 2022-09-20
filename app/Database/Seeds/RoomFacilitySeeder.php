@@ -26,15 +26,15 @@ class RoomFacilitySeeder extends Seeder
             ],
             [
                 "name"  => "Kasur",
-                "price" => 150000,
+                "price" => 100000,
             ],
             [
                 "name"  => "TV",
-                "price" => 15000,
+                "price" => 10000,
             ],
             [
                 "name"        => "AC",
-                "price"       => 200000,
+                "price"       => 300000,
                 "is_disabled" => 1,
             ],
         ];
