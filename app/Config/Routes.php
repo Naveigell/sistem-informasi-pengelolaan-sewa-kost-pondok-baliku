@@ -90,6 +90,7 @@ $routes->group('member', ['filter' => 'memberfilter'], function ($routes) {
 
     $routes->get('complaints', 'Member\ComplaintController::index', ["as" => "member.complaints.index"]);
     $routes->post('complaints', 'Member\ComplaintController::store', ["as" => "member.complaints.store"]);
+    $routes->put('complaints/update/(:num)', 'Member\ComplaintController::update/$1', ["as" => "member.complaints.update"]);
 
     $routes->get('accounts', 'Member\AccountController::index', ["as" => "member.accounts.index"]);
     $routes->post('accounts', 'Member\AccountController::update', ["as" => "member.accounts.update"]);

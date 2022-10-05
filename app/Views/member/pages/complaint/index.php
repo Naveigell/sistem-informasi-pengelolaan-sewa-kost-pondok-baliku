@@ -118,6 +118,7 @@ Complaint
                             <th>Nama Penghuni</th>
                             <th>Gambar Lampiran</th>
                             <th>Status Keluhan</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,6 +141,19 @@ Complaint
                                         <span class="badge bg-danger">Ditolak</span>
                                     <?php else: ?>
                                         <span class="badge bg-warning">Sedang Di Proses</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if ((is_null($complaint['approved_by_member']) || $complaint['approved_by_member'] == 0) && $complaint['status'] == \App\Models\Complaint::STATUS_FINISHED): ?>
+                                        <form method="post" action="<?= route_to('member.complaints.update', $complaint['id']); ?>" id="form-complaint-<?= $complaint['id']; ?>">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" value="PUT" name="_method">
+                                            <input type="hidden" value="" name="approved" id="form-approved-by-member-<?= $complaint['id']; ?>">
+                                            <button type="button" data-complaint-id="<?= $complaint['id']; ?>" class="btn-finish btn-sm btn icon icon-left btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Terima </button>
+                                            <button type="button" data-complaint-id="<?= $complaint['id']; ?>" class="btn-reject btn-sm btn icon icon-left btn-danger"> Tolak </button>
+                                        </form>
+                                    <?php else: ?>
+                                        -
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -197,6 +211,34 @@ Complaint
                     render_errors($("#error-messages"), JSON.parse(response.responseText));
                 }
             });
-        })
+        });
+
+        $('.btn-finish').on('click', function () {
+            var complaintId = $(this).data('complaint-id');
+
+            process(complaintId, 1);
+        });
+
+        $('.btn-reject').on('click', function () {
+            var complaintId = $(this).data('complaint-id');
+
+            process(complaintId, 0);
+        });
+
+        function process(complaintId, status) {
+            var reply = $('#form-approved-by-member-' + complaintId);
+
+            $('#form-complaint-status-' + complaintId).val(status);
+
+            Swal.fire({
+                title: 'Yakin ' + (status === 1 ? 'selesai' : 'tolak') + ' ?',
+                confirmButtonText: 'Simpan',
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    reply.val(status);
+                    $('#form-complaint-' + complaintId).submit();
+                }
+            });
+        }
     </script>
 <?= $this->endSection() ?>

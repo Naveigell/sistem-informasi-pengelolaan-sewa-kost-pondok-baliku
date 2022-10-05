@@ -45,6 +45,11 @@ class CreateComplaintsTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'approved_by_member' => [
+                'type' => 'INTEGER',
+                'constraint' => 5,
+                'null' => true,
+            ]
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('room_id', 'rooms', 'id', 'CASCADE', 'CASCADE');

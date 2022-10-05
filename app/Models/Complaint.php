@@ -12,5 +12,5 @@ class Complaint extends Model
     const STATUS_FINISHED    = 'finished';
     const STATUS_REJECTED    = 'rejected';
 
-    protected $allowedFields = ['room_id', 'user_id', 'complaint_date', 'proof', 'description', 'reply', 'status'];
+    protected $allowedFields = ['room_id', 'user_id', 'complaint_date', 'proof', 'description', 'reply', 'status', 'approved_by_member'];
 }

@@ -56,4 +56,16 @@ class ComplaintController extends BaseController
             render_json(204);
         }
     }
+
+    public function update($complaintId)
+    {
+        $approved = $this->request->getVar('approved');
+
+        (new Complaint())->builder()->where('id', $complaintId)->update([
+            "approved_by_member" => $approved,
+            "status"             => $approved == 1 ? Complaint::STATUS_FINISHED : Complaint::STATUS_ON_PROGRESS,
+        ]);
+
+        return redirect()->route('member.complaints.index')->withInput()->with('success', 'Berhasil mengubah status');
+    }
 }

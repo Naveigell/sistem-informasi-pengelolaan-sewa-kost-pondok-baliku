@@ -39,6 +39,12 @@ class RegisterController extends BaseController
             return redirect()->route('register.index')->withInput()->with('errors', $validator->getErrors());
         }
 
+        if ((new User())->where('username', $this->request->getVar('username'))->countAllResults() > 0) {
+            return redirect()->route('register.index')->withInput()->with('errors', [
+                "username" => "Username sudah digunakan",
+            ]);
+        }
+
         try {
 
             $user = new User();
