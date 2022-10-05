@@ -30,7 +30,13 @@ class PaymentController extends BaseController
 
     public function historyIndex()
     {
-        $payments = (new Payment())->whereNotIn('status', [Payment::STATUS_UNVERIFIED])->findAll();
+        $payments = (new Payment())->whereNotIn('status', [Payment::STATUS_UNVERIFIED]);
+
+        if (@$_GET['sort']) {
+            $payments = $payments->orderBy('room_id', $_GET['sort']);
+        }
+
+        $payments = $payments->findAll();
 
         return view('admin/pages/payment/history/index', compact('payments'));
     }
