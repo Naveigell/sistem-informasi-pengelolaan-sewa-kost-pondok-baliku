@@ -28,16 +28,16 @@ Payment
             </div>
             <!-- table bordered -->
             <div class="table-responsive p-3">
-                <div class="form-group ml-2">
-                    <label for="" class="d-inline-block">Urutkan dari : </label>
-                    <form action="<?= route_to('admin.payments.histories.index'); ?>" class="d-inline-block" id="form-sort">
-                        <select name="sort" id="sort-field" class="">
-                            <option <?php if (@$_GET['sort'] == 'asc'): ?> selected <?php endif; ?> value="asc">Kebawah</option>
-                            <option <?php if (@$_GET['sort'] == 'desc'): ?> selected <?php endif; ?> value="desc">Keatas</option>
-                        </select>
-                    </form>
-                </div>
-                <table class="table table-bordered mb-0">
+<!--                <div class="form-group ml-2">-->
+<!--                    <label for="" class="d-inline-block">Urutkan dari : </label>-->
+<!--                    <form action="--><?//= route_to('admin.payments.histories.index'); ?><!--" class="d-inline-block" id="form-sort">-->
+<!--                        <select name="sort" id="sort-field" class="">-->
+<!--                            <option --><?php //if (@$_GET['sort'] == 'asc'): ?><!-- selected --><?php //endif; ?><!-- value="asc">Kebawah</option>-->
+<!--                            <option --><?php //if (@$_GET['sort'] == 'desc'): ?><!-- selected --><?php //endif; ?><!-- value="desc">Keatas</option>-->
+<!--                        </select>-->
+<!--                    </form>-->
+<!--                </div>-->
+                <table class="table table-bordered mb-0" id="data-table">
                     <thead>
                     <tr>
                         <th>Nomor Kamar</th>
@@ -126,6 +126,8 @@ Payment
 <script>
     $('#sort-field').on('change', function (e) {
         $('#form-sort').submit();
-    })
+    });
+
+    $('#data-table').DataTable();
 </script>
 <?= $this->endSection() ?>
